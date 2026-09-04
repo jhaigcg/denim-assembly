@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Referenced by tailwind.config.ts fontFamily tokens. */
+  --font-archivo: "Archivo";
+  --font-bodoni: "Bodoni Moda";
+  --font-plex-mono: "IBM Plex Mono";
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f2f0ec;
+}
+
+body {
+  color: #0b0d12;
+  font-family: var(--font-archivo), Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+a {
+  color: #22307a;
+  text-decoration: none;
+}
+a:hover {
+  color: #0b0d12;
+}
+
+/* number inputs: drop the spinners, they fight the mono type */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/*
+ * CJK: Chinese has no spaces, so a constrained flex column breaks it one
+ * character per line. Every element that can render Chinese gets this.
+ */
+.keep-all {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Save-as-PDF: only the summary sheet prints, and it carries the logo + stamp. */
+@media print {
+  .no-print,
+  .app-header,
+  .app-footer {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff;
+  }
+  #summary-sheet {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  .sheet-card {
+    border: none !important;
+  }
+}
