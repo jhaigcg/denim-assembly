@@ -320,7 +320,7 @@ export function Summary() {
               <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-[#5C5F68]">
                 {grandLabel}
               </span>
-              <span className="font-serif font-normal text-[clamp(27px,3.2vw,34px)] tracking-[-0.01em]">
+              <span className="font-sans font-semibold text-[clamp(25px,3vw,32px)] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
                 {grand}
               </span>
             </div>

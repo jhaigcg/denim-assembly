@@ -706,7 +706,7 @@ export function Customiser() {
         <div className="sticky bottom-0 bg-white border-t border-line-soft px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-3.5 pb-4 shrink-0 z-[3] shadow-bar">
           <div className="flex items-baseline justify-between gap-3.5 mb-3 flex-wrap">
             <div className="flex items-baseline gap-2.5 min-w-0">
-              <span className="font-serif font-normal text-[30px] tracking-[-0.01em] leading-none">
+              <span className="font-sans font-semibold text-[28px] tracking-[-0.01em] leading-none [font-variant-numeric:tabular-nums]">
                 {money(unit, currency, 2)}
               </span>
               <span className="font-mono text-[10.5px] tracking-[0.12em] uppercase text-[#5C5F68]">
