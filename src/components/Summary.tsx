@@ -27,7 +27,7 @@ import { Logo } from "./Logo";
 const num = (v: number | string) => Number(v) || 0;
 
 const MonoHead = ({ children }: { children: React.ReactNode }) => (
-  <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-indigo mb-4">
+  <div className="font-mono text-[12px] tracking-[0.16em] uppercase text-indigo mb-4">
     {children}
   </div>
 );
@@ -243,14 +243,14 @@ export function Summary() {
         <button
           type="button"
           onClick={() => router.push("/customiser")}
-          className="bg-transparent border border-[#C9CAD2] px-[18px] py-[11px] font-sans text-[13px] rounded whitespace-nowrap shrink-0 hover:border-ink transition-colors"
+          className="bg-transparent border border-[#C9CAD2] px-[18px] py-[11px] font-sans text-[15px] rounded whitespace-nowrap shrink-0 hover:border-ink transition-colors"
         >
           {t.editSpec}
         </button>
         {banner && (
           <div
             className={clsx(
-              "flex items-center gap-2.5 px-4 py-[11px] text-[13px] max-w-[52ch] leading-[1.5]",
+              "flex items-center gap-2.5 px-4 py-[11px] text-[15px] max-w-[52ch] leading-[1.5]",
               s.submitState === "failed"
                 ? "bg-error-bg text-error-tx"
                 : "bg-info-bg text-indigo",
@@ -266,14 +266,14 @@ export function Summary() {
         <div className="flex justify-between items-start gap-x-8 gap-y-6 px-[clamp(20px,3.4vw,40px)] pt-[clamp(24px,3.4vw,36px)] pb-[26px] border-b border-ink flex-wrap">
           <div>
             <Logo variant="sheet" />
-            <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5C5F68] mt-1.5">
+            <div className="font-mono text-[12px] tracking-[0.16em] uppercase text-[#5C5F68] mt-1.5">
               {t.tagline} · {t.fdBadge}
             </div>
-            <h1 className="font-serif font-normal text-[clamp(30px,4vw,42px)] leading-[1.04] tracking-[-0.015em] mt-6 mb-0">
+            <h1 className="font-serif font-normal text-[clamp(34.5px,4.6vw,48.5px)] leading-[1.04] tracking-[-0.015em] mt-6 mb-0">
               {sampleOnly ? t.summarySample : t.summarySpec}
             </h1>
           </div>
-          <div className="font-mono text-[11px] leading-[2] text-[#4A4E58] text-right">
+          <div className="font-mono text-[12.5px] leading-[2] text-[#4A4E58] text-right">
             <div>
               {t.ref} {ref || "—"}
             </div>
@@ -294,7 +294,7 @@ export function Summary() {
               {specRows.map((r, i) => (
                 <div
                   key={i}
-                  className="flex justify-between gap-5 py-[11px] border-b border-[#F2F2EE] text-[13.5px]"
+                  className="flex justify-between gap-5 py-[11px] border-b border-[#F2F2EE] text-[15.5px]"
                 >
                   <span className="text-[#4A4E58] whitespace-nowrap keep-all">
                     {r.k}
@@ -310,21 +310,21 @@ export function Summary() {
             {totalRows.map((r, i) => (
               <div
                 key={i}
-                className="flex justify-between gap-4 py-[9px] text-[13.5px] text-[#4A4E58]"
+                className="flex justify-between gap-4 py-[9px] text-[15.5px] text-[#4A4E58]"
               >
                 <span className="keep-all">{r.k}</span>
                 <span className="font-mono text-ink whitespace-nowrap">{r.v}</span>
               </div>
             ))}
             <div className="flex justify-between items-baseline gap-4 mt-3.5 pt-3.5 border-t border-line">
-              <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-[#5C5F68]">
+              <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-[#5C5F68]">
                 {grandLabel}
               </span>
-              <span className="font-sans font-semibold text-[clamp(25px,3vw,32px)] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
+              <span className="font-sans font-semibold text-[clamp(28.5px,3.45vw,37px)] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
                 {grand}
               </span>
             </div>
-            <div className="mt-[18px] text-[12px] leading-[1.6] text-[#4A4E58] [text-wrap:pretty] keep-all">
+            <div className="mt-[18px] text-[14px] leading-[1.6] text-[#4A4E58] [text-wrap:pretty] keep-all">
               {summaryTerms}
             </div>
           </div>
@@ -337,7 +337,7 @@ export function Summary() {
             {(["company", "name", "email", "country"] as (keyof ContactDetails)[]).map(
               (key, i) => (
                 <label key={key} className="flex flex-col gap-1.5">
-                  <span className="text-[12px] text-[#5C5F68]">
+                  <span className="text-[14px] text-[#5C5F68]">
                     {t.fields[i][0]}
                     {(key === "company" || key === "email") && (
                       <span className="text-error-tx"> *</span>
@@ -348,20 +348,20 @@ export function Summary() {
                     value={s.contact[key]}
                     onChange={(e) => s.setContact({ [key]: e.target.value })}
                     placeholder={t.fields[i][1]}
-                    className="border border-line bg-white rounded h-[46px] px-3 font-sans text-[16px] text-ink outline-none w-full focus:border-ink"
+                    className="border border-line bg-white rounded h-[46px] px-3 font-sans text-[18.5px] text-ink outline-none w-full focus:border-ink"
                   />
                 </label>
               ),
             )}
           </div>
           <label className="flex flex-col gap-1.5 mt-3.5">
-            <span className="text-[12px] text-[#5C5F68]">{t.notesLabel}</span>
+            <span className="text-[14px] text-[#5C5F68]">{t.notesLabel}</span>
             <textarea
               rows={3}
               value={s.contact.notes}
               onChange={(e) => s.setContact({ notes: e.target.value })}
               placeholder={t.notesPh}
-              className="border border-line bg-white rounded p-3 font-sans text-[16px] text-ink outline-none w-full resize-y focus:border-ink"
+              className="border border-line bg-white rounded p-3 font-sans text-[18.5px] text-ink outline-none w-full resize-y focus:border-ink"
             />
           </label>
 
@@ -371,7 +371,7 @@ export function Summary() {
               disabled={!canSubmit || s.submitState === "sending"}
               onClick={submitSpec}
               className={clsx(
-                "sm:flex-1 px-4 py-4 font-sans text-[14px] font-medium rounded",
+                "sm:flex-1 px-4 py-4 font-sans text-[16px] font-medium rounded",
                 canSubmit
                   ? "bg-ink text-paper cursor-pointer hover:bg-indigo transition-colors"
                   : "bg-[#D8D8D2] text-[#5C5F68] cursor-not-allowed",
@@ -386,12 +386,12 @@ export function Summary() {
             <button
               type="button"
               onClick={() => window.print()}
-              className="bg-white border border-ink px-[22px] py-4 font-sans text-[14px] rounded whitespace-nowrap text-center hover:bg-ink hover:text-paper transition-colors"
+              className="bg-white border border-ink px-[22px] py-4 font-sans text-[16px] rounded whitespace-nowrap text-center hover:bg-ink hover:text-paper transition-colors"
             >
               {t.savePdf}
             </button>
           </div>
-          <div className="no-print mt-3 text-[12px] text-[#5C5F68] keep-all">
+          <div className="no-print mt-3 text-[14px] text-[#5C5F68] keep-all">
             {zh
               ? `公司名称与邮箱为必填项。提交后将以本汇总发送邮件至 ${FACTORY_EMAIL}，您也可保存 PDF 后自行发送。`
               : `Company and email are required. Submitting sends this summary to ${FACTORY_EMAIL} — or save the PDF and send it yourself.`}

@@ -68,10 +68,10 @@ function GroupHeader({
 }) {
   return (
     <div className="flex items-baseline justify-between gap-3 mb-3.5">
-      <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-indigo">
+      <div className="font-mono text-[12px] tracking-[0.16em] uppercase text-indigo">
         {label}
       </div>
-      <div className="text-[12.5px] text-[#5C5F68] text-right keep-all">{value}</div>
+      <div className="text-[14.5px] text-[#5C5F68] text-right keep-all">{value}</div>
     </div>
   );
 }
@@ -94,7 +94,7 @@ function Stepper({
 }) {
   const v = Number(value) || 0;
   const btn =
-    "w-11 shrink-0 grid place-items-center text-[20px] leading-none text-[#4A4E58] select-none hover:bg-paper-raised active:bg-line disabled:opacity-30";
+    "w-11 shrink-0 grid place-items-center text-[23px] leading-none text-[#4A4E58] select-none hover:bg-paper-raised active:bg-line disabled:opacity-30";
   return (
     <div
       className={clsx(
@@ -117,7 +117,7 @@ function Stepper({
         aria-label={ariaLabel}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full min-w-0 text-center font-mono text-[16px] text-ink outline-none border-x border-line bg-white"
+        className="w-full min-w-0 text-center font-mono text-[18.5px] text-ink outline-none border-x border-line bg-white"
       />
       <button
         type="button"
@@ -222,13 +222,13 @@ export function Customiser() {
                     transition: "filter .4s ease",
                   }}
                 />
-                <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-txt-4 text-center">
+                <span className="font-mono text-[11.5px] tracking-[0.18em] uppercase text-txt-4 text-center">
                   {style.code} · {zh ? "面料预览" : "fabric preview"}
                 </span>
               </div>
             </div>
           )}
-          <div className="absolute top-6 left-6 font-mono text-[10.5px] tracking-[0.16em] uppercase text-paper bg-[rgba(11,13,18,0.72)] px-[11px] py-[7px] pointer-events-none whitespace-nowrap">
+          <div className="absolute top-6 left-6 font-mono text-[12px] tracking-[0.16em] uppercase text-paper bg-[rgba(11,13,18,0.72)] px-[11px] py-[7px] pointer-events-none whitespace-nowrap">
             {style.code} · {zh ? style.cn : style.name}
           </div>
           <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-x-4 gap-y-2 bg-[rgba(11,13,18,0.74)] px-3.5 py-2.5 pointer-events-none">
@@ -238,7 +238,7 @@ export function Customiser() {
                   className="w-3.5 h-3.5 rounded-full border border-[rgba(242,240,236,0.4)] shrink-0"
                   style={{ background: sw.hex }}
                 />
-                <span className="font-mono text-[10px] tracking-[0.06em] text-paper truncate">
+                <span className="font-mono text-[11.5px] tracking-[0.06em] text-paper truncate">
                   <span className="text-[rgba(242,240,236,0.55)] uppercase">{sw.label} </span>
                   {sw.name}
                 </span>
@@ -247,7 +247,7 @@ export function Customiser() {
           </div>
         </div>
         <div className="flex gap-2.5 px-6 py-[18px] bg-paper border-t border-line shrink-0">
-          <div className="ml-auto flex items-center gap-[18px] font-mono text-[10.5px] tracking-[0.12em] uppercase text-[#5C5F68]">
+          <div className="ml-auto flex items-center gap-[18px] font-mono text-[12px] tracking-[0.12em] uppercase text-[#5C5F68]">
             <span
               className="cursor-not-allowed opacity-70"
               title="Not implemented in this build"
@@ -278,11 +278,11 @@ export function Customiser() {
                   type="button"
                   onClick={() => s.setStep(n)}
                   className={clsx(
-                    "flex-1 px-2.5 pt-[9px] pb-2.5 text-[12.5px] font-medium rounded text-left",
+                    "flex-1 px-2.5 pt-[9px] pb-2.5 text-[14.5px] font-medium rounded text-left",
                     active ? "bg-ink text-paper" : "bg-[#F2F2EE] text-[#4A4E58]",
                   )}
                 >
-                  <span className="block font-mono text-[9.5px] tracking-[0.12em] opacity-60">
+                  <span className="block font-mono text-[11px] tracking-[0.12em] opacity-60">
                     {step.no}
                   </span>
                   {zh ? step.cnLabel : step.label}
@@ -290,10 +290,10 @@ export function Customiser() {
               );
             })}
           </div>
-          <h2 className="font-serif font-normal m-0 text-[clamp(24px,2.5vw,30px)] leading-[1.12] tracking-[-0.01em]">
+          <h2 className="font-serif font-normal m-0 text-[clamp(27.5px,2.88vw,34.5px)] leading-[1.12] tracking-[-0.01em]">
             {zh ? STEPS[s.step - 1].cnTitle : STEPS[s.step - 1].title}
           </h2>
-          <p className="mt-2.5 mb-0 text-[13.5px] leading-[1.6] text-txt-3 [text-wrap:pretty] keep-all">
+          <p className="mt-2.5 mb-0 text-[15.5px] leading-[1.6] text-txt-3 [text-wrap:pretty] keep-all">
             {zh ? STEPS[s.step - 1].cnHint : STEPS[s.step - 1].hint}
           </p>
         </div>
@@ -304,10 +304,10 @@ export function Customiser() {
           {s.step === 1 && (
             <div>
               <div className="flex items-baseline justify-between gap-3 mb-3.5">
-                <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-indigo">
+                <div className="font-mono text-[12px] tracking-[0.16em] uppercase text-indigo">
                   {t.baseStyleHead}
                 </div>
-                <div className="text-[12.5px] text-[#5C5F68]">{t.fobPer}</div>
+                <div className="text-[14.5px] text-[#5C5F68]">{t.fobPer}</div>
               </div>
               <div className="flex flex-col gap-2">
                 {PRODUCTS.map((p) => {
@@ -323,19 +323,19 @@ export function Customiser() {
                       )}
                     >
                       <div className="min-w-0">
-                        <div className="text-[14px] font-medium keep-all">
+                        <div className="text-[16px] font-medium keep-all">
                           {zh ? p.cn : p.name}
                         </div>
-                        <div className="text-[12.5px] text-[#4A4E58] mt-0.5 leading-[1.4] keep-all">
+                        <div className="text-[14.5px] text-[#4A4E58] mt-0.5 leading-[1.4] keep-all">
                           {zh ? p.cnDesc : p.desc}
                         </div>
                       </div>
                       <div className="text-right whitespace-nowrap">
-                        <div className="font-mono text-[12.5px]">
+                        <div className="font-mono text-[14.5px]">
                           {money(p.base, currency, 2)} {t.perPc}
                         </div>
                         {zh && (
-                          <div className="text-[11.5px] text-[#5C5F68] mt-[3px]">
+                          <div className="text-[13px] text-[#5C5F68] mt-[3px]">
                             {p.name}
                           </div>
                         )}
@@ -391,15 +391,15 @@ export function Customiser() {
                                 : "none",
                             }}
                           />
-                          <div className="text-[12.5px] font-medium leading-[1.25] mt-2 keep-all">
+                          <div className="text-[14.5px] font-medium leading-[1.25] mt-2 keep-all">
                             {optLabel(lang, g.code as GroupCode, v.code, v.name)}
                           </div>
                           {(zh ? v.cnDesc || v.desc : v.desc) && (
-                            <div className="text-[11px] text-[#5C5F68] mt-[3px] leading-[1.35] keep-all">
+                            <div className="text-[12.5px] text-[#5C5F68] mt-[3px] leading-[1.35] keep-all">
                               {zh ? v.cnDesc || v.desc : v.desc}
                             </div>
                           )}
-                          <div className="font-mono text-[10.5px] text-[#4A4E58] mt-1">
+                          <div className="font-mono text-[12px] text-[#4A4E58] mt-1">
                             {price}
                           </div>
                         </button>
@@ -427,14 +427,14 @@ export function Customiser() {
                           )}
                         >
                           <div>
-                            <div className="text-[14px] font-medium keep-all">
+                            <div className="text-[16px] font-medium keep-all">
                               {optLabel(lang, g.code as GroupCode, v.code, v.name)}
                             </div>
-                            <div className="text-[12.5px] text-[#4A4E58] mt-0.5 leading-[1.4] keep-all">
+                            <div className="text-[14.5px] text-[#4A4E58] mt-0.5 leading-[1.4] keep-all">
                               {zh ? v.cnDesc || v.desc : v.desc}
                             </div>
                           </div>
-                          <div className="font-mono text-[12px] text-[#4A4E58] whitespace-nowrap">
+                          <div className="font-mono text-[14px] text-[#4A4E58] whitespace-nowrap">
                             {price}
                           </div>
                         </button>
@@ -452,25 +452,25 @@ export function Customiser() {
               {/* ---- Size run allocation ---- */}
               <div>
                 <div className="flex items-center justify-between gap-3 mb-1 flex-wrap">
-                  <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-indigo">
+                  <div className="font-mono text-[12.5px] tracking-[0.16em] uppercase text-indigo">
                     {zh ? t.kSizeRun : "Size run"}
                   </div>
                   <button
                     type="button"
                     onClick={() => s.evenSplitRun()}
-                    className="font-mono text-[10.5px] tracking-[0.1em] uppercase text-[#4A4E58] border border-line rounded px-3 h-8 hover:border-ink hover:text-ink transition-colors"
+                    className="font-mono text-[12px] tracking-[0.1em] uppercase text-[#4A4E58] border border-line rounded px-3 h-8 hover:border-ink hover:text-ink transition-colors"
                   >
                     {zh ? "平均分配" : "Even split"}
                   </button>
                 </div>
-                <p className="text-[12.5px] leading-[1.5] text-[#4A4E58] mb-4 keep-all">
+                <p className="text-[14.5px] leading-[1.5] text-[#4A4E58] mb-4 keep-all">
                   {t.sizeRunNote}
                 </p>
 
                 <div className="flex flex-col gap-2 mb-4">
                   {SIZES.map((sz, i) => (
                     <div key={sz} className="flex items-center gap-3">
-                      <span className="font-mono text-[13px] tracking-[0.04em] text-[#4A4E58] font-medium w-11 shrink-0">
+                      <span className="font-mono text-[15px] tracking-[0.04em] text-[#4A4E58] font-medium w-11 shrink-0">
                         {sz}
                       </span>
                       <Stepper
@@ -485,7 +485,7 @@ export function Customiser() {
 
                 {/* Balance status — prominent; a one-tap fix when it drifts */}
                 {runTotal === qty ? (
-                  <div className="flex items-center justify-between gap-3 px-4 h-12 rounded text-[13.5px] font-medium mb-[34px] bg-info-bg text-indigo">
+                  <div className="flex items-center justify-between gap-3 px-4 h-12 rounded text-[15.5px] font-medium mb-[34px] bg-info-bg text-indigo">
                     <span>{zh ? "已配平" : "Balanced"}</span>
                     <span className="font-mono">
                       {runTotal} {t.pcsLower}
@@ -495,7 +495,7 @@ export function Customiser() {
                   <button
                     type="button"
                     onClick={() => s.balanceRun()}
-                    className="flex items-center justify-between gap-3 w-full px-4 h-12 rounded text-[13.5px] font-medium mb-[34px] bg-error-bg text-error-tx hover:brightness-95 transition-[filter]"
+                    className="flex items-center justify-between gap-3 w-full px-4 h-12 rounded text-[15.5px] font-medium mb-[34px] bg-error-bg text-error-tx hover:brightness-95 transition-[filter]"
                   >
                     <span>
                       {runTotal} {t.of} {qty} {t.pcsLower} ·{" "}
@@ -523,10 +523,10 @@ export function Customiser() {
                   className="flex items-center justify-between gap-3 w-full px-4 py-3.5 text-left"
                 >
                   <span className="min-w-0">
-                    <span className="block font-mono text-[11px] tracking-[0.16em] uppercase text-indigo">
+                    <span className="block font-mono text-[12.5px] tracking-[0.16em] uppercase text-indigo">
                       {t.blockHead}
                     </span>
-                    <span className="block text-[12px] text-[#5C5F68] mt-1 keep-all">
+                    <span className="block text-[14px] text-[#5C5F68] mt-1 keep-all">
                       {blockCustomised
                         ? zh
                           ? "已调整 — 与标准码不同"
@@ -538,7 +538,7 @@ export function Customiser() {
                   </span>
                   <span
                     className={clsx(
-                      "shrink-0 font-mono text-[16px] text-[#5C5F68] transition-transform",
+                      "shrink-0 font-mono text-[18.5px] text-[#5C5F68] transition-transform",
                       blockOpen && "rotate-45",
                     )}
                     aria-hidden
@@ -549,7 +549,7 @@ export function Customiser() {
 
                 {blockOpen && (
                   <div className="px-4 pb-4 pt-1">
-                    <p className="text-[12.5px] leading-[1.5] text-[#4A4E58] mb-3.5 keep-all">
+                    <p className="text-[14.5px] leading-[1.5] text-[#4A4E58] mb-3.5 keep-all">
                       {zh
                         ? "选择尺码，编辑该尺码的六个尺寸（厘米）。每个尺码独立保存。"
                         : "Pick a size, then edit its six measurements in cm. Each size is stored on its own."}
@@ -564,7 +564,7 @@ export function Customiser() {
                         type="button"
                         onClick={() => s.setBlockSize(sz)}
                         className={clsx(
-                          "h-11 font-mono text-[12px] tracking-[0.02em] rounded border transition-colors",
+                          "h-11 font-mono text-[14px] tracking-[0.02em] rounded border transition-colors",
                           on
                             ? "border-ink bg-ink text-paper"
                             : "border-line bg-white text-[#4A4E58] hover:border-ink",
@@ -577,10 +577,10 @@ export function Customiser() {
                 </div>
 
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-[#5C5F68]">
+                  <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-[#5C5F68]">
                     {zh ? "正在编辑" : "Editing"}
                   </span>
-                  <span className="font-mono text-[13px] font-medium text-ink">
+                  <span className="font-mono text-[15px] font-medium text-ink">
                     {s.blockSize}
                   </span>
                 </div>
@@ -588,7 +588,7 @@ export function Customiser() {
                 <div className="grid grid-cols-2 gap-x-3 gap-y-4">
                   {MEASURE_KEYS.map((key, i) => (
                     <label key={key} className="flex flex-col gap-1.5">
-                      <span className="text-[13px] text-[#4A4E58] font-medium">
+                      <span className="text-[15px] text-[#4A4E58] font-medium">
                         {t.measures[i]}
                       </span>
                       <span className="flex items-center border border-line rounded px-3 h-12 bg-white focus-within:border-ink">
@@ -600,9 +600,9 @@ export function Customiser() {
                           onChange={(e) =>
                             s.setMeasure(s.blockSize, key, e.target.value)
                           }
-                          className="border-0 bg-transparent outline-none font-mono text-[16px] w-full min-w-0 text-ink"
+                          className="border-0 bg-transparent outline-none font-mono text-[18.5px] w-full min-w-0 text-ink"
                         />
-                        <span className="font-mono text-[11px] text-[#5C5F68] shrink-0 pl-1">
+                        <span className="font-mono text-[12.5px] text-[#5C5F68] shrink-0 pl-1">
                           cm
                         </span>
                       </span>
@@ -610,7 +610,7 @@ export function Customiser() {
                   ))}
                 </div>
 
-                <div className="mt-4 bg-[#F0F1F6] px-4 py-3.5 text-[12.5px] leading-[1.55] text-[#3E4250] keep-all">
+                <div className="mt-4 bg-[#F0F1F6] px-4 py-3.5 text-[14.5px] leading-[1.55] text-[#3E4250] keep-all">
                   {zh
                     ? `当前编辑 ${s.blockSize} 尺码。版型调整每条加收 ${money(blockFee, currency, 2)}，需额外 4 天版房工作。打样费一次性收取 ${money(SAMPLE_FEE, currency, 2)} — 版房出格、车缝并寄出封样，确认后方可开裁大货。`
                     : `Editing ${s.blockSize}. A modified block adds ${money(blockFee, currency, 2)} per piece and 4 days of pattern work. Sampling is charged once at ${money(SAMPLE_FEE, currency, 2)} — the pattern room grades, sews and ships a sealed sample for your sign-off before bulk cutting.`}
@@ -626,7 +626,7 @@ export function Customiser() {
         <div className="border-t border-[#EAEAE6] px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-5 pb-4 bg-paper-raised min-[900px]:shrink-0">
           <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
             <div className="min-w-0 flex-1 basis-[200px]">
-              <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#5C5F68] mb-[7px]">
+              <div className="font-mono text-[11.5px] tracking-[0.16em] uppercase text-[#5C5F68] mb-[7px]">
                 {t.qtyHead}
               </div>
               <div className="flex items-center gap-1.5 flex-wrap">
@@ -637,9 +637,9 @@ export function Customiser() {
                     value={s.qty}
                     onChange={(e) => s.setQty(e.target.value)}
                     onBlur={() => s.balanceRun()}
-                    className="border-0 outline-none bg-transparent font-mono text-[16px] w-[60px] text-ink"
+                    className="border-0 outline-none bg-transparent font-mono text-[18.5px] w-[60px] text-ink"
                   />
-                  <span className="font-mono text-[10.5px] text-[#5C5F68] tracking-[0.08em]">
+                  <span className="font-mono text-[12px] text-[#5C5F68] tracking-[0.08em]">
                     {t.pcs}
                   </span>
                 </span>
@@ -651,7 +651,7 @@ export function Customiser() {
                       type="button"
                       onClick={() => s.setQtyBalanced(n)}
                       className={clsx(
-                        "h-10 px-[13px] font-mono text-[11.5px] tracking-[0.06em] rounded border",
+                        "h-10 px-[13px] font-mono text-[13px] tracking-[0.06em] rounded border",
                         on
                           ? "border-ink bg-ink text-paper"
                           : "border-line bg-white text-[#4A4E58]",
@@ -664,17 +664,17 @@ export function Customiser() {
               </div>
             </div>
             <div className="text-right shrink-0 min-w-0">
-              <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#5C5F68] mb-[7px]">
+              <div className="font-mono text-[11.5px] tracking-[0.16em] uppercase text-[#5C5F68] mb-[7px]">
                 {t.tier}
               </div>
-              <div className="font-mono text-[12px] text-indigo tracking-[0.04em]">
+              <div className="font-mono text-[14px] text-indigo tracking-[0.04em]">
                 {tierLabel(tier, lang, true)}
               </div>
             </div>
           </div>
 
           {belowMoq && (
-            <div className="bg-error-bg text-error-tx px-3.5 py-[11px] text-[12.5px] leading-[1.5] mb-3.5">
+            <div className="bg-error-bg text-error-tx px-3.5 py-[11px] text-[14.5px] leading-[1.5] mb-3.5">
               {t.belowMoqNote}
             </div>
           )}
@@ -683,7 +683,7 @@ export function Customiser() {
             {breakdown.map((b, i) => (
               <div
                 key={i}
-                className="flex justify-between text-[12.5px] text-[#5C5F68] gap-4"
+                className="flex justify-between text-[14.5px] text-[#5C5F68] gap-4"
               >
                 <span className="keep-all">{b.label}</span>
                 <span className="font-mono whitespace-nowrap">{b.amount}</span>
@@ -691,7 +691,7 @@ export function Customiser() {
             ))}
           </div>
 
-          <div className="flex justify-between gap-3 pt-3 border-t border-line-soft font-mono text-[11px] text-[#5C5F68] flex-wrap">
+          <div className="flex justify-between gap-3 pt-3 border-t border-line-soft font-mono text-[12.5px] text-[#5C5F68] flex-wrap">
             <span>
               {zh ? "报价币种 " : "QUOTED IN "}
               {currency} · FOB SHENZHEN
@@ -706,14 +706,14 @@ export function Customiser() {
         <div className="sticky bottom-0 bg-white border-t border-line-soft px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-3.5 pb-4 shrink-0 z-[3] shadow-bar">
           <div className="flex items-baseline justify-between gap-3.5 mb-3 flex-wrap">
             <div className="flex items-baseline gap-2.5 min-w-0">
-              <span className="font-sans font-semibold text-[28px] tracking-[-0.01em] leading-none [font-variant-numeric:tabular-nums]">
+              <span className="font-sans font-semibold text-[32px] tracking-[-0.01em] leading-none [font-variant-numeric:tabular-nums]">
                 {money(unit, currency, 2)}
               </span>
-              <span className="font-mono text-[10.5px] tracking-[0.12em] uppercase text-[#5C5F68]">
+              <span className="font-mono text-[12px] tracking-[0.12em] uppercase text-[#5C5F68]">
                 {t.perPc}
               </span>
             </div>
-            <div className="text-[12.5px] text-[#5C5F68] text-right keep-all">
+            <div className="text-[14.5px] text-[#5C5F68] text-right keep-all">
               {zh
                 ? `总计 ${money(total, currency)} · ${qty} 条（含 ${money(SAMPLE_FEE, currency, 2)} 打样费）`
                 : `Total ${money(total, currency)} · ${qty} pcs incl. ${money(SAMPLE_FEE, currency, 2)} sampling`}
@@ -725,7 +725,7 @@ export function Customiser() {
               disabled={belowMoq}
               onClick={() => goSummary(false)}
               className={clsx(
-                "flex-1 px-3.5 py-3.5 font-sans text-[14px] font-medium rounded tracking-[0.01em]",
+                "flex-1 px-3.5 py-3.5 font-sans text-[16px] font-medium rounded tracking-[0.01em] whitespace-nowrap",
                 belowMoq
                   ? "bg-[#D8D8D2] text-[#5C5F68] cursor-not-allowed"
                   : "bg-ink text-paper cursor-pointer hover:bg-indigo transition-colors",
@@ -738,7 +738,7 @@ export function Customiser() {
             <button
               type="button"
               onClick={() => goSummary(true)}
-              className="bg-white border border-[#C9CAD2] px-[18px] py-3.5 font-sans text-[13.5px] rounded whitespace-nowrap hover:border-ink transition-colors"
+              className="bg-white border border-[#C9CAD2] px-[18px] py-3.5 font-sans text-[15.5px] rounded whitespace-nowrap hover:border-ink transition-colors"
             >
               {t.samplingOnly}
             </button>

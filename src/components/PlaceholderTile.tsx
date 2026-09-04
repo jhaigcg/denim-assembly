@@ -21,10 +21,10 @@ export function PlaceholderTile({
         className,
       )}
     >
-      <span className="font-mono text-[13px] tracking-[0.18em] text-ink/70">
+      <span className="font-mono text-[15px] tracking-[0.18em] text-ink/70">
         {code}
       </span>
-      <span className="font-mono text-[9.5px] tracking-[0.16em] uppercase text-txt-4">
+      <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-txt-4">
         {hint}
       </span>
     </div>

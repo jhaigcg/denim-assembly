@@ -3,15 +3,15 @@ import { clsx } from "@/lib/clsx";
 type Variant = "header" | "sheet" | "footer";
 
 const TILE: Record<Variant, string> = {
-  header: "w-7 h-7 bg-paper text-ink text-[12.5px]",
-  sheet: "w-[52px] h-[52px] bg-ink text-paper text-[21px]",
-  footer: "w-[52px] h-[52px] border border-paper text-paper text-[21px]",
+  header: "w-7 h-7 bg-paper text-ink text-[14.5px]",
+  sheet: "w-[52px] h-[52px] bg-ink text-paper text-[24px]",
+  footer: "w-[52px] h-[52px] border border-paper text-paper text-[24px]",
 };
 
 const WORDMARK: Record<Variant, string> = {
-  header: "text-[13.5px]",
-  sheet: "text-[19px]",
-  footer: "text-[20px]",
+  header: "text-[15.5px]",
+  sheet: "text-[22px]",
+  footer: "text-[23px]",
 };
 
 const GAP: Record<Variant, string> = {

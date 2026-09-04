@@ -41,13 +41,13 @@ export function Header() {
           className="flex items-baseline gap-3 min-w-0 shrink-0 text-paper hover:text-paper"
         >
           <Logo variant="header" />
-          <span className="hidden sm:inline font-mono text-[10.5px] tracking-[0.16em] text-[#9AA3C8] uppercase whitespace-nowrap overflow-hidden text-ellipsis">
+          <span className="hidden sm:inline font-mono text-[12px] tracking-[0.16em] text-[#9AA3C8] uppercase whitespace-nowrap overflow-hidden text-ellipsis">
             {t.tagline}
           </span>
         </Link>
         <Link
           href="/#contact"
-          className="sm:hidden font-mono text-[10.5px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
+          className="sm:hidden font-mono text-[12px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
         >
           {t.contact}
         </Link>
@@ -65,7 +65,7 @@ export function Header() {
               key={tab.href}
               href={tab.href}
               className={clsx(
-                "flex-1 sm:flex-none text-center min-h-[40px] sm:min-h-0 flex items-center justify-center px-3 py-[9px] font-sans text-[12.5px] font-medium rounded whitespace-nowrap transition-colors",
+                "flex-1 sm:flex-none text-center min-h-[40px] sm:min-h-0 flex items-center justify-center px-3 py-[9px] font-sans text-[14.5px] font-medium rounded whitespace-nowrap transition-colors",
                 active
                   ? "bg-paper text-ink"
                   : "bg-transparent text-[#B9BCC6] hover:text-paper",
@@ -86,7 +86,7 @@ export function Header() {
               type="button"
               onClick={() => setCurrency(c.code)}
               className={clsx(
-                "flex-1 sm:flex-none min-h-[36px] sm:min-h-0 px-[7px] py-1.5 font-mono text-[10px] tracking-[0.04em] rounded",
+                "flex-1 sm:flex-none min-h-[36px] sm:min-h-0 px-[7px] py-1.5 font-mono text-[11.5px] tracking-[0.04em] rounded",
                 activeCcy === c.code
                   ? "bg-paper text-ink"
                   : "bg-transparent text-[#9AA3C8]",
@@ -104,7 +104,7 @@ export function Header() {
               type="button"
               onClick={() => setLang(l.key)}
               className={clsx(
-                "min-h-[36px] sm:min-h-0 px-3 sm:px-[9px] py-1.5 font-sans text-[11px] font-medium rounded whitespace-nowrap",
+                "min-h-[36px] sm:min-h-0 px-3 sm:px-[9px] py-1.5 font-sans text-[12.5px] font-medium rounded whitespace-nowrap",
                 activeLang === l.key
                   ? "bg-paper text-ink"
                   : "bg-transparent text-[#9AA3C8]",
@@ -119,7 +119,7 @@ export function Header() {
 
         <Link
           href="/#contact"
-          className="hidden sm:inline font-mono text-[10.5px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
+          className="hidden sm:inline font-mono text-[12px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
         >
           {t.contact}
         </Link>
