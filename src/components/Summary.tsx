@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import {
   FACTORY_EMAIL,
   FORM_ENDPOINT,
-  GROUPS,
   SAMPLE_FEE,
   SIZES,
 } from "@/lib/data";
 import { GROUP_CN, T, optLabel } from "@/lib/i18n";
 import {
+  groupsFor,
   money,
   orderTotal,
   priceLines,
@@ -76,7 +76,7 @@ export function Summary() {
     const rows: { k: string; v: string }[] = [
       { k: t.kBaseStyle, v: zh ? `${style.cn} · ${style.name}` : style.name },
     ];
-    for (const g of GROUPS) {
+    for (const g of groupsFor(style)) {
       const v = g.values.find((x) => x.code === s.sel[g.code]);
       const name = v
         ? optLabel(lang, g.code as GroupCode, v.code, v.name)
@@ -152,8 +152,8 @@ export function Summary() {
 
   const summaryTerms = sampleOnly
     ? zh
-      ? `按此规格车缝封样一条，费用 ${money(SAMPLE_FEE, currency, 2)}（另加运费），约需 10 天。该费用可在首个大货订单（起订 100 条）中抵扣。`
-      : `One sealed sample sewn to this specification, charged at ${money(SAMPLE_FEE, currency, 2)} plus freight. Approx. 10 days. The fee is credited against your first bulk order (MOQ 100 pcs).`
+      ? `按此规格车缝封样一条，费用 ${money(SAMPLE_FEE, currency, 2)}（另加运费），约需 10 天。该费用可在首个大货订单（起订 200 条）中抵扣。`
+      : `One sealed sample sewn to this specification, charged at ${money(SAMPLE_FEE, currency, 2)} plus freight. Approx. 10 days. The fee is credited against your first bulk order (MOQ 200 pcs).`
     : t.termsBulk;
 
   const canSubmit = !!(s.contact.company && s.contact.email);
@@ -206,7 +206,7 @@ export function Summary() {
   }
 
   function buildMailBody() {
-    const opts = GROUPS.map((g) => {
+    const opts = groupsFor(style).map((g) => {
       const v = g.values.find((x) => x.code === s.sel[g.code]);
       return `${g.name}: ${v ? v.name : "—"}`;
     });
@@ -269,7 +269,7 @@ export function Summary() {
             <div className="font-mono text-[12px] tracking-[0.16em] uppercase text-[#5C5F68] mt-1.5">
               {t.tagline} · {t.fdBadge}
             </div>
-            <h1 className="font-serif font-normal text-[clamp(34.5px,4.6vw,48.5px)] leading-[1.04] tracking-[-0.015em] mt-6 mb-0">
+            <h1 className="font-display font-bold text-[clamp(28px,3.6vw,38px)] leading-[1.04] tracking-[-0.02em] mt-6 mb-0">
               {sampleOnly ? t.summarySample : t.summarySpec}
             </h1>
           </div>
@@ -320,7 +320,7 @@ export function Summary() {
               <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-[#5C5F68]">
                 {grandLabel}
               </span>
-              <span className="font-sans font-semibold text-[clamp(28.5px,3.45vw,37px)] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
+              <span className="font-display font-bold text-[clamp(27px,3.2vw,34px)] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
                 {grand}
               </span>
             </div>

@@ -2,13 +2,26 @@ export type Lang = "en" | "zh";
 
 export type CurrencyCode = "USD" | "AUD" | "EUR" | "SGD" | "NZD" | "CNY";
 
+/**
+ * A style's family decides which option groups apply to it. `denim` is the
+ * default and covers most of the catalogue; `woven` and `yarndye` swap in a
+ * different fabric/finish pair and a different trim set.
+ */
+export type Family = "denim" | "woven" | "yarndye";
+
 export type GroupCode =
   | "fabric"
   | "wash"
   | "hardware"
   | "thread"
   | "patch"
-  | "pocket";
+  | "pocket"
+  | "cloth"
+  | "finish"
+  | "wpocket"
+  | "wlabel"
+  | "stripe"
+  | "sfinish";
 
 export type ControlType = "swatch" | "row";
 
@@ -17,10 +30,14 @@ export interface Product {
   name: string;
   cn: string;
   tag: string;
-  /** FOB per-piece price in USD at MOQ 100. */
+  /** Which option groups apply. Omitted means "denim". */
+  fam?: Family;
+  /** FOB per-piece price in USD at MOQ 200. */
   base: number;
-  /** Path under /public, or undefined for a placeholder tile. */
-  photo?: string;
+  /** Path under /public. Every style has one. */
+  photo: string;
+  /** Path under /public for the back view, or undefined if none was shot. */
+  photoBack?: string;
   desc: string;
   cnDesc: string;
   /** Four hex swatches shown as 14px dots on the card. */
@@ -41,6 +58,8 @@ export interface OptionGroup {
   step: number;
   code: GroupCode;
   name: string;
+  /** Restricts this group to one family or several. Omitted applies to all. */
+  fam?: Family | Family[];
   control: ControlType;
   values: OptionValue[];
 }
@@ -67,7 +86,14 @@ export interface Measurements {
   opening: number | string;
 }
 
+/**
+ * Spans every group code across all families — the store seeds every key up
+ * front (see `FAM_DEFAULTS`) so switching families never loses a prior pick.
+ * The family filter decides which keys are actually read for pricing/display.
+ */
 export type Selection = Record<GroupCode, string>;
+
+export type PreviewView = "front" | "back";
 
 export interface ContactDetails {
   company: string;

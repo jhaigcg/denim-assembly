@@ -33,7 +33,11 @@ const config: Config = {
         "neutral-chip": "#EDEDE9",
       },
       fontFamily: {
-        serif: ["var(--font-bodoni)", "Didot", "Georgia", "serif"],
+        // Headlines, product names, step titles, summary masthead, large price
+        // figures. An earlier revision used Bodoni Moda here — removed, its
+        // hairline strokes broke up at step-title size. Do not reintroduce a
+        // high-contrast display serif.
+        display: ["var(--font-display)", "var(--font-archivo)", "Helvetica", "sans-serif"],
         sans: ["var(--font-archivo)", "Helvetica", "Arial", "sans-serif"],
         mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
       },

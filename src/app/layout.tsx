@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     template: "%s · Denim Assembly",
   },
   description:
-    "B2B customised denim from a Guangdong manufacturer, factory-direct to overseas wholesale buyers. 13 base styles, deep customisation, live per-piece and order-total pricing in six currencies. MOQ 100 pcs, FOB Shenzhen.",
+    "B2B customised denim from a Guangdong manufacturer, factory-direct to overseas wholesale buyers. 21 base styles, deep customisation, live per-piece and order-total pricing in six currencies. MOQ 200 pcs, FOB Guangzhou.",
   keywords: [
     "custom jeans manufacturer",
     "private label denim",
     "wholesale jeans factory",
     "OEM denim China",
-    "FOB Shenzhen denim",
+    "FOB Guangzhou denim",
   ],
   openGraph: {
     title: "Denim Assembly — Customised Jeans, Factory Direct",
@@ -54,7 +54,7 @@ export default function RootLayout({
         {/* Root-layout <head> applies site-wide (not the pages/_document pitfall the rule warns about). */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </head>

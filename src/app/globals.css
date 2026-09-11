@@ -6,7 +6,7 @@
   color-scheme: light;
   /* Referenced by tailwind.config.ts fontFamily tokens. */
   --font-archivo: "Archivo";
-  --font-bodoni: "Bodoni Moda";
+  --font-display: "Space Grotesk";
   --font-plex-mono: "IBM Plex Mono";
 }
 

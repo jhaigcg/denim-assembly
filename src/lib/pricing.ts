@@ -1,6 +1,6 @@
-import { BLOCK_FEE, CURRENCIES, GROUPS, PRODUCTS, SAMPLE_FEE, TIERS } from "./data";
+import { BLOCK_FEE, CURRENCIES, GROUPS, PRODUCTS, SAMPLE_FEE, TIERS, inFam } from "./data";
 import { GROUP_CN, optLabel, T } from "./i18n";
-import type { CurrencyCode, Lang, Selection, Tier } from "./types";
+import type { CurrencyCode, Family, Lang, OptionGroup, Product, Selection, Tier } from "./types";
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
 
@@ -35,6 +35,16 @@ export function styleFor(code: string) {
   return PRODUCTS.find((p) => p.code === code) || PRODUCTS[0];
 }
 
+export function famFor(style: Product): Family {
+  return style.fam || "denim";
+}
+
+/** Groups that apply to a style's family, in step order (they are not stored that way). */
+export function groupsFor(style: Product): OptionGroup[] {
+  const fam = famFor(style);
+  return GROUPS.filter((g) => inFam(g, fam)).slice().sort((a, b) => a.step - b.step);
+}
+
 export interface BreakdownLine {
   label: string;
   /** USD amount (unformatted). */
@@ -54,7 +64,7 @@ export interface PriceResult {
 /**
  * Core pricing maths, ported from `priceLines()` in the design reference.
  *
- *   unitGross  = base + Σ(selected option.d) + blockFee
+ *   unitGross  = base + Σ(option.d for each group in the style's family) + blockFee
  *   tier       = highest tier where qty >= tier.min
  *   unitPrice  = round2(unitGross * (1 - tier.off))
  */
@@ -65,6 +75,7 @@ export function priceLines(
   lang: Lang,
 ): PriceResult {
   const sty = styleFor(styleCode);
+  const fam = famFor(sty);
   const zh = lang === "zh";
   const tt = T[lang] || T.en;
   const base = sty.base;
@@ -75,6 +86,7 @@ export function priceLines(
 
   let extra = 0;
   for (const g of GROUPS) {
+    if (!inFam(g, fam)) continue;
     const v = g.values.find((x) => x.code === sel[g.code]);
     if (v && v.d) {
       extra += v.d;

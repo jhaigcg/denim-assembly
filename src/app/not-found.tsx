@@ -6,7 +6,7 @@ export default function NotFound() {
       <div className="font-mono text-[12px] tracking-[0.24em] uppercase text-indigo mb-6">
         404
       </div>
-      <h1 className="font-serif font-normal text-[clamp(37px,6.9vw,73.5px)] leading-[0.95] tracking-[-0.02em]">
+      <h1 className="font-display font-bold text-[clamp(32px,6vw,64px)] leading-[0.95] tracking-[-0.025em]">
         This page was never cut.
       </h1>
       <Link

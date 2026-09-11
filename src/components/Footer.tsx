@@ -15,7 +15,9 @@ const MonoLabel = ({ children }: { children: React.ReactNode }) => (
 export function Footer() {
   const hydrated = useHydrated();
   const lang = useAppStore((s) => s.lang);
-  const t = T[hydrated ? lang : "en"];
+  const activeLang = hydrated ? lang : "en";
+  const t = T[activeLang];
+  const factoryAddress = FACTORY_ADDRESS[activeLang];
 
   return (
     <footer
@@ -28,7 +30,7 @@ export function Footer() {
           <div className="font-mono text-[12px] tracking-[0.16em] uppercase text-[#9AA3C8] mt-2">
             {t.tagline}
           </div>
-          <p className="font-serif mt-[22px] text-[clamp(18.5px,1.72vw,22px)] leading-[1.5] text-[#D8D4CB] max-w-[26ch] [text-wrap:pretty]">
+          <p className="mt-[22px] text-[clamp(14px,1.3vw,15.5px)] leading-[1.65] text-[#D8D4CB] max-w-[26ch] [text-wrap:pretty]">
             {t.footerBlurb}
           </p>
           <div className="inline-block mt-[18px] font-mono text-[11.5px] tracking-[0.16em] uppercase border border-[rgba(246,246,244,0.3)] px-[11px] py-[7px]">
@@ -39,7 +41,7 @@ export function Footer() {
         <div>
           <MonoLabel>{t.factory}</MonoLabel>
           <div className="flex flex-col gap-[7px] text-[15.5px] leading-[1.5] text-[#D4D7DE] keep-all">
-            {FACTORY_ADDRESS.map((line) => (
+            {factoryAddress.map((line) => (
               <span key={line}>{line}</span>
             ))}
           </div>
@@ -51,7 +53,6 @@ export function Footer() {
             <a href={`mailto:${FACTORY_EMAIL}`} className="text-paper hover:text-white">
               {FACTORY_EMAIL}
             </a>
-            <span>{t.whatsapp}</span>
             <span>{t.hours}</span>
           </div>
         </div>

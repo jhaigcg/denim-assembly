@@ -2,13 +2,21 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { DEFAULT_RUN, SIZES, seedMeasurements } from "@/lib/data";
+import {
+  DEFAULT_RUN,
+  DEFAULT_SEL,
+  FAM_DEFAULTS,
+  SIZES,
+  seedMeasurements,
+} from "@/lib/data";
+import { famFor, styleFor } from "@/lib/pricing";
 import type {
   ContactDetails,
   CurrencyCode,
   GroupCode,
   Lang,
   Measurements,
+  PreviewView,
   Selection,
   SubmitState,
 } from "@/lib/types";
@@ -18,6 +26,7 @@ interface AppState {
   currency: CurrencyCode;
   step: 1 | 2 | 3 | 4;
   styleCode: string;
+  previewView: PreviewView;
   sel: Selection;
   qty: number | string;
   run: (number | string)[];
@@ -31,9 +40,11 @@ interface AppState {
   setLang: (l: Lang) => void;
   setCurrency: (c: CurrencyCode) => void;
   setStep: (s: 1 | 2 | 3 | 4) => void;
+  /** Change the base style within the customiser (no screen/step jump). */
   setStyle: (code: string) => void;
   /** Jump into the customiser at step 2 with a style pre-selected (showroom card click). */
   openStyle: (code: string) => void;
+  toggleView: () => void;
   pick: (group: GroupCode, value: string) => void;
   setQty: (q: number | string) => void;
   /** Set quantity AND rescale the size run proportionally so it stays balanced. */
@@ -81,14 +92,13 @@ function rescaleRun(run: (number | string)[], target: number): number[] {
   return out;
 }
 
-const DEFAULT_SEL: Selection = {
-  fabric: "raw12",
-  wash: "vint-l",
-  hardware: "antique",
-  thread: "gold",
-  patch: "std",
-  pocket: "arc",
-};
+/** Selecting a style seeds that family's defaults, so switching from e.g. a woven
+ * style back to denim restores sensible denim picks rather than leaving woven codes
+ * selected against groups that no longer apply. */
+function selectionForStyle(prevSel: Selection, styleCode: string): Selection {
+  const fam = famFor(styleFor(styleCode));
+  return { ...prevSel, ...FAM_DEFAULTS[fam] };
+}
 
 export const useAppStore = create<AppState>()(
   persist(
@@ -97,6 +107,7 @@ export const useAppStore = create<AppState>()(
       currency: "USD",
       step: 1,
       styleCode: "DA-01",
+      previewView: "front",
       sel: { ...DEFAULT_SEL },
       qty: 300,
       run: [...DEFAULT_RUN],
@@ -110,8 +121,21 @@ export const useAppStore = create<AppState>()(
       setLang: (lang) => set({ lang }),
       setCurrency: (currency) => set({ currency }),
       setStep: (step) => set({ step }),
-      setStyle: (styleCode) => set({ styleCode }),
-      openStyle: (styleCode) => set({ styleCode, step: 2 }),
+      setStyle: (styleCode) =>
+        set((s) => ({
+          styleCode,
+          previewView: "front",
+          sel: selectionForStyle(s.sel, styleCode),
+        })),
+      openStyle: (styleCode) =>
+        set((s) => ({
+          styleCode,
+          step: 2,
+          previewView: "front",
+          sel: selectionForStyle(s.sel, styleCode),
+        })),
+      toggleView: () =>
+        set((s) => ({ previewView: s.previewView === "back" ? "front" : "back" })),
       pick: (group, value) => set((s) => ({ sel: { ...s.sel, [group]: value } })),
       setQty: (qty) => set({ qty }),
       setQtyBalanced: (qty) =>
@@ -143,7 +167,10 @@ export const useAppStore = create<AppState>()(
       },
     }),
     {
-      name: "denim-assembly:v1",
+      // v2: 21-style catalogue with product families (denim/woven/yarndye) replaced
+      // the v1 13-style shape — bump the key so a v1 localStorage blob (old MOQ,
+      // old option codes) never gets rehydrated into the new state shape.
+      name: "denim-assembly:v2",
       storage: createJSONStorage(() => localStorage),
       // Rehydrate manually after mount so SSR and first client render both use
       // the defaults above — no hydration mismatch on prices / language.
@@ -153,6 +180,7 @@ export const useAppStore = create<AppState>()(
         currency: s.currency,
         step: s.step,
         styleCode: s.styleCode,
+        previewView: s.previewView,
         sel: s.sel,
         qty: s.qty,
         run: s.run,

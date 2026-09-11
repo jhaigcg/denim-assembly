@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { GROUPS, MOQ, SAMPLE_FEE, SIZES } from "@/lib/data";
-import { money, orderTotal, priceLines, styleFor } from "@/lib/pricing";
+import { MOQ, SAMPLE_FEE, SIZES } from "@/lib/data";
+import { groupsFor, money, orderTotal, priceLines, styleFor } from "@/lib/pricing";
 import type { Selection } from "@/lib/types";
 
 /**
@@ -196,7 +196,7 @@ function buildPlainText(r: {
   };
   price: { display: { unit: string; grand: string; sampleFee: string } };
 }) {
-  const opts = GROUPS.map((g) => {
+  const opts = groupsFor(styleFor(r.style.code)).map((g) => {
     const v = g.values.find((x) => x.code === r.selection[g.code]);
     return `${g.name}: ${v ? v.name : "—"}`;
   });
@@ -213,7 +213,7 @@ function buildPlainText(r: {
     ...opts,
     `Quantity: ${r.qty} pcs`,
     `Size run: ${sizeRun}`,
-    `Unit price: ${r.price.display.unit} ${r.currency} FOB Shenzhen`,
+    `Unit price: ${r.price.display.unit} ${r.currency} FOB Guangzhou`,
     `${r.sampleOnly ? "Sample cost" : "Order total"}: ${r.price.display.grand} ${r.currency} (incl. ${r.price.display.sampleFee} sampling)`,
     "",
     `Notes: ${r.contact.notes || "—"}`,
