@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { PRODUCTS } from "@/lib/data";
 import { T, TAG_CN } from "@/lib/i18n";
 import { FILTER_CODES } from "@/lib/filters";
-import { money } from "@/lib/pricing";
 import { clsx } from "@/lib/clsx";
 import { useAppStore } from "@/store/useAppStore";
 import { useHydrated } from "./StoreHydration";
@@ -30,7 +29,6 @@ export function Showroom() {
   const hydrated = useHydrated();
   const router = useRouter();
   const lang = useAppStore((s) => (hydrated ? s.lang : "en"));
-  const currency = useAppStore((s) => (hydrated ? s.currency : "USD"));
   const openStyle = useAppStore((s) => s.openStyle);
   const t = T[lang];
   const zh = lang === "zh";
@@ -182,15 +180,7 @@ export function Showroom() {
               <div className="text-[12.5px] text-txt-3 leading-[1.5] keep-all">
                 {zh ? p.cnDesc : p.desc}
               </div>
-              <div className="flex items-baseline justify-between gap-2.5 flex-wrap mt-0.5 pt-[9px] border-t border-line">
-                <div className="font-mono text-[12.5px] whitespace-nowrap">
-                  {money(p.base, currency, 2)}
-                </div>
-                <div className="font-mono text-[9px] tracking-[0.14em] text-txt-4 whitespace-nowrap">
-                  {t.fobPc}
-                </div>
-              </div>
-              <div className="flex gap-[5px] mt-[5px]">
+              <div className="flex gap-[5px] mt-[7px] pt-[9px] border-t border-line">
                 {p.sw.map((h, i) => (
                   <span
                     key={i}

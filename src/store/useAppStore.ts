@@ -12,7 +12,6 @@ import {
 import { famFor, styleFor } from "@/lib/pricing";
 import type {
   ContactDetails,
-  CurrencyCode,
   GroupCode,
   Lang,
   Measurements,
@@ -23,7 +22,6 @@ import type {
 
 interface AppState {
   lang: Lang;
-  currency: CurrencyCode;
   step: 1 | 2 | 3 | 4;
   styleCode: string;
   previewView: PreviewView;
@@ -38,7 +36,6 @@ interface AppState {
   quoteRef: string | null;
 
   setLang: (l: Lang) => void;
-  setCurrency: (c: CurrencyCode) => void;
   setStep: (s: 1 | 2 | 3 | 4) => void;
   /** Change the base style within the customiser (no screen/step jump). */
   setStyle: (code: string) => void;
@@ -104,7 +101,6 @@ export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       lang: "en",
-      currency: "USD",
       step: 1,
       styleCode: "DA-01",
       previewView: "front",
@@ -119,7 +115,6 @@ export const useAppStore = create<AppState>()(
       quoteRef: null,
 
       setLang: (lang) => set({ lang }),
-      setCurrency: (currency) => set({ currency }),
       setStep: (step) => set({ step }),
       setStyle: (styleCode) =>
         set((s) => ({
@@ -177,7 +172,6 @@ export const useAppStore = create<AppState>()(
       skipHydration: true,
       partialize: (s) => ({
         lang: s.lang,
-        currency: s.currency,
         step: s.step,
         styleCode: s.styleCode,
         previewView: s.previewView,

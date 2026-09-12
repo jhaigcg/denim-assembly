@@ -1,7 +1,11 @@
 import type { Family, GroupCode, Lang } from "./types";
 
 /**
- * All UI copy, both languages — ported verbatim from the design reference `const T`.
+ * All UI copy, both languages — ported from the design reference `const T`, then
+ * adapted for a request-a-quote flow: no price, discount or fee figure is shown
+ * to the buyer anywhere in the customer-facing UI. `pricing.ts` still computes
+ * the real numbers server-side, for the factory's own reference in the
+ * submission it receives — see `src/app/api/quote/route.ts`.
  * English is the default. Language switching must be instant and non-destructive.
  */
 
@@ -19,24 +23,18 @@ export interface Dict {
   fdBadge: string;
   fdStrip: string[];
   heroBadge: string;
-  fobPc: string;
   saveConfig: string;
   shareLink: string;
   baseStyleHead: string;
-  fobPer: string;
   sizeRunNote: string;
   blockHead: string;
   qtyHead: string;
   pcs: string;
-  tier: string;
-  perPc: string;
   belowMoqNote: string;
   samplingOnly: string;
   editSpec: string;
   ref: string;
-  valid: string;
   yourSpec: string;
-  pricingHead: string;
   yourDetails: string;
   notesLabel: string;
   notesPh: string;
@@ -57,38 +55,33 @@ export interface Dict {
   tabs: { showroom: string; customiser: string };
   filters: string[];
   measures: string[];
-  included: string;
   summarySpec: string;
   summarySample: string;
-  grandTotal: string;
-  grandSample: string;
   kBaseStyle: string;
   kQty: string;
   kSampleQty: string;
   kSampleSize: string;
   kBulkQty: string;
   kSizeRun: string;
-  kTier: string;
-  kUnit: string;
-  kLine: string;
-  kSampling: string;
-  kSealed: string;
-  kBulkPrice: string;
-  kFreight: string;
-  freightVal: string;
-  baseUnit: string;
-  blockLine: string;
-  volDisc: string;
-  sampleLine: string;
   ctaMin: string;
   ctaGo: string;
   balanced: string;
   allocated: string;
   of: string;
   fields: [string, string][];
-  termsBulk: string;
+  quoteNote: string;
+  nextStepsHead: string;
+  replyPromise: string;
+  sampleTerms: string;
+  bulkTerms: string;
   days: string;
   pcsLower: string;
+  /** Internal price-breakdown line labels — used by `pricing.ts` for the
+   * submission record/email sent to the factory, never rendered to the buyer. */
+  baseUnit: string;
+  blockLine: string;
+  volDisc: string;
+  sampleLine: string;
 }
 
 export const T: Record<Lang, Dict> = {
@@ -97,36 +90,30 @@ export const T: Record<Lang, Dict> = {
     contact: "Contact",
     heroEyebrow2: "Thousand base styles",
     heroStyleRef: "DA-18 · Barrel Denim Jeans",
-    heroSpecLabels: ["Minimum order", "Pricing", "Lead time"],
-    heroSpecValues: ["200 pcs / style", "Tiered breaks", "~4 weeks"],
+    heroSpecLabels: ["Minimum order", "Turnaround", "Lead time"],
+    heroSpecValues: ["200 pcs / style", "1 business day", "~4 weeks"],
     heroTitle: "Your label, cut on our floor.",
     heroBody:
-      "Pick a base style. Specify denim quality, wash, hardware and trim, then set your size run. Minimum order 200 pieces per style — FOB from US$12.40 per piece, quoted in USD, AUD, EUR, SGD, NZD or CNY.",
-    heroCta: "Build a spec & get pricing →",
+      "Pick a base style. Specify denim quality, wash, hardware and trim, then set your size run. Minimum order 200 pieces per style. Submit your specification and our team will follow up with a formal quotation.",
+    heroCta: "Build a spec & request a quote →",
     heroCta2: "Talk to our team",
     fdBadge: "FACTORY DIRECT",
     fdStrip: ["Manufacturer, not an agent", "No trading-company markup", "Factory-gate pricing"],
     heroBadge: "13 OZ WASHED KHAKI · 100% COTTON",
-    fobPc: "FOB /PC @ 200",
     saveConfig: "Save configuration",
     shareLink: "Share link",
     baseStyleHead: "Base style · 21 blocks",
-    fobPer: "FOB / pc",
     sizeRunNote:
       "Standard grade W28–W38, L30/32/34. Split the run across sizes — the total must match your order quantity.",
     blockHead: "Block adjustment by size",
     qtyHead: "Order quantity · MOQ 200",
     pcs: "PCS",
-    tier: "Tier",
-    perPc: "/ pc",
     belowMoqNote:
       "Below minimum. Wholesale orders start at 200 pcs per style — adjust the quantity to continue, or order a sampling run instead.",
     samplingOnly: "Sampling only",
     editSpec: "← Edit specification",
     ref: "REF",
-    valid: "VALID 30 DAYS",
     yourSpec: "Your specification",
-    pricingHead: "Indicative pricing",
     yourDetails: "Your details",
     notesLabel: "Notes — artwork, labels, packing, target price",
     notesPh: "Anything our pattern room should know",
@@ -145,7 +132,7 @@ export const T: Record<Lang, Dict> = {
     termsList: [
       "MOQ 200 pcs per style",
       "FOB Guangzhou · CIF on request",
-      "Sampling US$35 · ~4 week lead",
+      "Sampling available · ~4 week lead",
       "30% deposit, balance vs. B/L",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
@@ -153,29 +140,14 @@ export const T: Record<Lang, Dict> = {
     tabs: { showroom: "Showroom", customiser: "Customiser" },
     filters: ["All styles", "Wide leg", "Straight", "Flare", "High rise", "Raw denim", "Stretch", "Women’s"],
     measures: ["Waist", "Hip", "Thigh", "Knee", "Inseam", "Leg opening"],
-    included: "included",
     summarySpec: "Specification summary",
     summarySample: "Sampling request",
-    grandTotal: "Estimated total",
-    grandSample: "Sample cost",
     kBaseStyle: "Base style",
     kQty: "Order quantity",
     kSampleQty: "Sample quantity",
     kSampleSize: "Sample size",
     kBulkQty: "Intended bulk quantity",
     kSizeRun: "Size run",
-    kTier: "Price tier",
-    kUnit: "Unit price (FOB Guangzhou)",
-    kLine: "Line total",
-    kSampling: "Sampling fee (one-off)",
-    kSealed: "Sealed sample × 1",
-    kBulkPrice: "Indicative bulk price at",
-    kFreight: "Freight",
-    freightVal: "At cost, on request",
-    baseUnit: "base unit",
-    blockLine: "Modified block (per pc)",
-    volDisc: "Volume discount",
-    sampleLine: "Sampling fee · one-off",
     ctaMin: "Minimum 200 pcs to continue",
     ctaGo: "Review & submit",
     balanced: "Balanced",
@@ -187,44 +159,47 @@ export const T: Record<Lang, Dict> = {
       ["Email", "name@company.com"],
       ["Country / port", "e.g. Australia · Sydney"],
     ],
-    termsBulk:
-      "Indicative only. Final pricing is confirmed after fabric availability, artwork review and a sealed sample. Terms: 30% deposit, balance against B/L copy. Lead time approx. 4 weeks after sample approval.",
+    quoteNote: "No price is shown here — submit your spec and we'll reply with a formal quotation.",
+    nextStepsHead: "What happens next",
+    replyPromise: "We reply within 1 business day.",
+    sampleTerms:
+      "One sealed sample sewn to this specification, plus freight. Approx. 10 days. We'll confirm the sampling fee when we respond, and it's credited against your first bulk order (MOQ 200 pcs).",
+    bulkTerms:
+      "This specification will be reviewed by our pattern room. We'll reply with a formal quotation confirming pricing, lead time and payment terms. Terms: 30% deposit, balance against B/L copy. Lead time approx. 4 weeks after sample approval.",
     days: "DAYS",
     pcsLower: "pcs",
+    baseUnit: "base unit",
+    blockLine: "Modified block (per pc)",
+    volDisc: "Volume discount",
+    sampleLine: "Sampling fee · one-off",
   },
   zh: {
     tagline: "牛仔裤定制",
     contact: "联系我们",
     heroEyebrow2: "千款基础版型",
     heroStyleRef: "DA-18 · 桶形牛仔裤",
-    heroSpecLabels: ["最低起订", "价格", "交期"],
-    heroSpecValues: ["每款 200 条", "阶梯优惠", "约 4 周"],
+    heroSpecLabels: ["最低起订", "回复时效", "交期"],
+    heroSpecValues: ["每款 200 条", "1 个工作日", "约 4 周"],
     heroTitle: "您的品牌，我们的车间。",
     heroBody:
-      "选择基础版型，指定面料、洗水、五金与辅料，再设定尺码配比。每款起订 200 条 — FOB 单价 12.40 美元起，可用 USD、AUD、EUR、SGD、NZD 或 CNY 报价。",
-    heroCta: "定制并获取报价 →",
+      "选择基础版型，指定面料、洗水、五金与辅料，再设定尺码配比。每款起订 200 条。提交您的定制规格，我们的团队将为您回复正式报价。",
+    heroCta: "定制并申请报价 →",
     heroCta2: "联系我们的团队",
     fdBadge: "工厂直销",
     fdStrip: ["我们是制衣厂，非代理", "无贸易公司加价", "出厂价直接采购"],
     heroBadge: "13 安士水洗卡其 · 100% 全棉",
-    fobPc: "FOB/条 @200条",
     saveConfig: "保存配置",
     shareLink: "分享链接",
     baseStyleHead: "基础版型 · 21 款",
-    fobPer: "FOB 单价",
     sizeRunNote: "标准码 W28–W38，裤长 L30/32/34。按尺码分配数量 — 合计须等于订单数量。",
     blockHead: "按尺码调整版型",
     qtyHead: "订单数量 · 起订 200 条",
     pcs: "条",
-    tier: "价格档",
-    perPc: "/ 条",
     belowMoqNote: "低于起订量。每款批发订单起订 200 条 — 请调整数量后继续，或改为下单打样。",
     samplingOnly: "仅打样",
     editSpec: "← 修改规格",
     ref: "编号",
-    valid: "有效期 30 天",
     yourSpec: "您的定制规格",
-    pricingHead: "参考报价",
     yourDetails: "您的联系资料",
     notesLabel: "备注 — 图案、唛头、包装、目标价格",
     notesPh: "任何需要版房了解的信息",
@@ -242,7 +217,7 @@ export const T: Record<Lang, Dict> = {
     termsList: [
       "每款起订 200 条",
       "FOB 广州 · 可询 CIF",
-      "打样费 35 美元 · 交期约 4 周",
+      "可申请打样 · 交期约 4 周",
       "30% 订金，余款凭提单副本",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
@@ -250,29 +225,14 @@ export const T: Record<Lang, Dict> = {
     tabs: { showroom: "产品展厅", customiser: "定制配置" },
     filters: ["全部款式", "阔腿", "直筒", "喇叭", "高腰", "原色牛仔", "弹力", "女款"],
     measures: ["腰围", "臀围", "大腿围", "膝围", "内长", "脚口"],
-    included: "已包含",
     summarySpec: "定制规格汇总",
     summarySample: "打样申请",
-    grandTotal: "预估总额",
-    grandSample: "打样费用",
     kBaseStyle: "基础版型",
     kQty: "订单数量",
     kSampleQty: "打样数量",
     kSampleSize: "打样尺码",
     kBulkQty: "预计大货数量",
     kSizeRun: "尺码配比",
-    kTier: "价格档",
-    kUnit: "单价（FOB 广州）",
-    kLine: "货款小计",
-    kSampling: "打样费（一次性）",
-    kSealed: "封样 × 1 条",
-    kBulkPrice: "大货参考单价 @",
-    kFreight: "运费",
-    freightVal: "按实际费用，另询",
-    baseUnit: "基础单价",
-    blockLine: "版型调整（每条）",
-    volDisc: "数量折扣",
-    sampleLine: "打样费 · 一次性",
     ctaMin: "起订量 200 条",
     ctaGo: "确认并提交",
     balanced: "已配平",
@@ -284,10 +244,19 @@ export const T: Record<Lang, Dict> = {
       ["电子邮箱", "name@company.com"],
       ["国家 / 港口", "例：澳大利亚 · 悉尼"],
     ],
-    termsBulk:
-      "此为参考报价。最终价格需在确认面料供应、图案审核及封样后确定。付款条款：30% 订金，余款凭提单副本支付。封样确认后交期约 4 周。",
+    quoteNote: "此处不显示价格 — 提交规格后，我们将为您回复正式报价。",
+    nextStepsHead: "接下来会发生什么",
+    replyPromise: "我们将在 1 个工作日内回复。",
+    sampleTerms:
+      "按此规格车缝封样一条（另加运费），约需 10 天。打样费将在我们回复时为您确认，该费用可在首个大货订单（起订 200 条）中抵扣。",
+    bulkTerms:
+      "此规格将由我们的版房审核。我们将回复正式报价，确认价格、交期与付款条款。条款：30% 订金，余款凭提单副本支付。封样确认后交期约 4 周。",
     days: "天",
     pcsLower: "条",
+    baseUnit: "基础单价",
+    blockLine: "版型调整（每条）",
+    volDisc: "数量折扣",
+    sampleLine: "打样费 · 一次性",
   },
 };
 
@@ -358,23 +327,23 @@ export const STEPS: Step[] = [
     no: "01",
     label: "Base style", cnLabel: "基础版型",
     title: "Choose your base style", cnTitle: "选择基础版型",
-    hint: "Twenty-one graded production blocks. Prices are FOB per piece at MOQ 200 — volume breaks apply below.",
-    cnHint: "21 款已出格的生产版型。价格为起订 200 条时的 FOB 单价 — 下方可查看数量折扣。",
+    hint: "Twenty-one graded production blocks, ready to spec into a formal quotation.",
+    cnHint: "21 款已出格的生产版型，可直接定制并申请正式报价。",
   },
   {
     no: "02",
     label: "Fabric & wash", cnLabel: "面料与洗水",
     title: "Denim quality and wash", cnTitle: "面料品质与洗水",
-    hint: "Fabric upcharges are per piece against the 12oz raw indigo base. Wash runs in our own wash house after sewing.",
-    cnHint: "面料加价以 12 安原色靛蓝为基准，按条计算。洗水在本厂洗水房于车缝后完成。",
+    hint: "Wash runs in our own wash house after sewing.",
+    cnHint: "洗水在本厂洗水房于车缝后完成。",
     wovenLabel: "Fabric & finish", cnWovenLabel: "面料与整理",
     wovenTitle: "Fabric quality and finish", cnWovenTitle: "面料品质与整理工艺",
-    wovenHint: "Fabric upcharges are per piece against the natural linen-blend base. Finishing is applied after sewing in our own finishing room.",
-    cnWovenHint: "面料加价以本色亚麻混纺为基准，按条计算。整理工艺在本厂整理车间于车缝后完成。",
+    wovenHint: "Finishing is applied after sewing in our own finishing room.",
+    cnWovenHint: "整理工艺在本厂整理车间于车缝后完成。",
     yarnLabel: "Stripe & finish", cnYarnLabel: "条纹与整理",
     yarnTitle: "Yarn-dyed fabric and finish", cnYarnTitle: "色织面料与整理工艺",
-    yarnHint: "Stripe upcharges are per piece against the multi-stripe base. Yarn-dyed cloth is woven to colour before cutting — the pattern is in the yarn, not printed on.",
-    cnYarnHint: "条纹加价以多色条纹为基准，按条计算。色织面料在织造前先染纱，条纹织入布身而非印花。",
+    yarnHint: "Yarn-dyed cloth is woven to colour before cutting — the pattern is in the yarn, not printed on.",
+    cnYarnHint: "色织面料在织造前先染纱，条纹织入布身而非印花。",
   },
   {
     no: "03",

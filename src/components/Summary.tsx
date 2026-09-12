@@ -5,19 +5,10 @@ import { useRouter } from "next/navigation";
 import {
   FACTORY_EMAIL,
   FORM_ENDPOINT,
-  SAMPLE_FEE,
   SIZES,
 } from "@/lib/data";
 import { GROUP_CN, T, optLabel } from "@/lib/i18n";
-import {
-  groupsFor,
-  money,
-  orderTotal,
-  priceLines,
-  styleFor,
-  tierFor,
-  tierLabel,
-} from "@/lib/pricing";
+import { groupsFor, styleFor } from "@/lib/pricing";
 import { clsx } from "@/lib/clsx";
 import type { ContactDetails, GroupCode } from "@/lib/types";
 import { useAppStore } from "@/store/useAppStore";
@@ -39,15 +30,11 @@ export function Summary() {
   const [quoteDate, setQuoteDate] = useState("");
 
   const lang = s.lang;
-  const currency = s.currency;
   const zh = lang === "zh";
   const t = T[lang];
 
   const qty = num(s.qty);
   const style = styleFor(s.styleCode);
-  const { unit } = priceLines(s.styleCode, s.sel, qty, lang);
-  const tier = tierFor(qty);
-  const total = orderTotal(unit, qty);
   const sampleOnly = s.sampleOnly;
 
   const sampleSize =
@@ -83,12 +70,7 @@ export function Summary() {
         : "—";
       rows.push({
         k: zh && GROUP_CN[g.code] ? GROUP_CN[g.code] : g.name,
-        v: v
-          ? name +
-            (v.d
-              ? `  (+${money(v.d, currency, 2)}${zh ? "/条)" : "/pc)"}`
-              : "")
-          : "—",
+        v: name,
       });
     }
     if (sampleOnly) {
@@ -109,52 +91,12 @@ export function Summary() {
             "  ·  ",
           ),
         },
-        { k: t.kTier, v: tierLabel(tier, lang) },
       );
     }
     return rows;
-  }, [
-    lang,
-    zh,
-    currency,
-    style,
-    s.sel,
-    s.run,
-    qty,
-    sampleOnly,
-    sampleSize,
-    tier,
-    t,
-  ]);
+  }, [lang, zh, style, s.sel, s.run, qty, sampleOnly, sampleSize, t]);
 
-  const totalRows = sampleOnly
-    ? [
-        { k: t.kSealed, v: money(SAMPLE_FEE, currency, 2) },
-        {
-          k: `${t.kBulkPrice} ${qty.toLocaleString("en-US")} ${t.pcsLower}`,
-          v: `${money(unit, currency, 2)} ${t.perPc}`,
-        },
-        { k: t.kFreight, v: t.freightVal },
-      ]
-    : [
-        { k: t.kUnit, v: money(unit, currency, 2) },
-        {
-          k: `${t.kLine} · ${qty.toLocaleString("en-US")} ${t.pcsLower}`,
-          v: money(unit * qty, currency),
-        },
-        { k: t.kSampling, v: money(SAMPLE_FEE, currency, 2) },
-      ];
-
-  const grand = sampleOnly
-    ? money(SAMPLE_FEE, currency, 2)
-    : money(total, currency);
-  const grandLabel = sampleOnly ? t.grandSample : t.grandTotal;
-
-  const summaryTerms = sampleOnly
-    ? zh
-      ? `按此规格车缝封样一条，费用 ${money(SAMPLE_FEE, currency, 2)}（另加运费），约需 10 天。该费用可在首个大货订单（起订 200 条）中抵扣。`
-      : `One sealed sample sewn to this specification, charged at ${money(SAMPLE_FEE, currency, 2)} plus freight. Approx. 10 days. The fee is credited against your first bulk order (MOQ 200 pcs).`
-    : t.termsBulk;
+  const summaryTerms = sampleOnly ? t.sampleTerms : t.bulkTerms;
 
   const canSubmit = !!(s.contact.company && s.contact.email);
 
@@ -171,7 +113,6 @@ export function Summary() {
         body: JSON.stringify({
           ref: theRef,
           lang,
-          currency,
           styleCode: s.styleCode,
           sel: s.sel,
           qty,
@@ -221,8 +162,7 @@ export function Summary() {
       ...opts,
       `Quantity: ${qty} pcs`,
       `Size run: ${SIZES.map((sz, i) => `${sz}×${s.run[i] || 0}`).join(", ")}`,
-      `Unit price: ${money(unit, currency, 2)} ${currency} FOB`,
-      `${sampleOnly ? "Sample cost" : "Order total"}: ${grand} ${currency}`,
+      `Mode: ${sampleOnly ? "Sampling only" : "Bulk order"}`,
       "",
       `Notes: ${s.contact.notes || "—"}`,
     ].join("\n");
@@ -278,11 +218,6 @@ export function Summary() {
               {t.ref} {ref || "—"}
             </div>
             <div>{quoteDate}</div>
-            <div>
-              {zh ? "报价币种 " : "QUOTED IN "}
-              {currency}
-            </div>
-            <div className="text-indigo">{t.valid}</div>
           </div>
         </div>
 
@@ -306,23 +241,9 @@ export function Summary() {
           </div>
 
           <div className="px-[clamp(20px,3.4vw,40px)] pt-7 pb-8 bg-paper-raised">
-            <MonoHead>{t.pricingHead}</MonoHead>
-            {totalRows.map((r, i) => (
-              <div
-                key={i}
-                className="flex justify-between gap-4 py-[9px] text-[15.5px] text-[#4A4E58]"
-              >
-                <span className="keep-all">{r.k}</span>
-                <span className="font-mono text-ink whitespace-nowrap">{r.v}</span>
-              </div>
-            ))}
-            <div className="flex justify-between items-baseline gap-4 mt-3.5 pt-3.5 border-t border-line">
-              <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-[#5C5F68]">
-                {grandLabel}
-              </span>
-              <span className="font-display font-bold text-[clamp(27px,3.2vw,34px)] tracking-[-0.01em] [font-variant-numeric:tabular-nums]">
-                {grand}
-              </span>
+            <MonoHead>{t.nextStepsHead}</MonoHead>
+            <div className="font-display font-bold text-[clamp(22px,2.6vw,28px)] leading-[1.15] tracking-[-0.015em]">
+              {t.replyPromise}
             </div>
             <div className="mt-[18px] text-[14px] leading-[1.6] text-[#4A4E58] [text-wrap:pretty] keep-all">
               {summaryTerms}

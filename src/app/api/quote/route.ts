@@ -8,13 +8,19 @@ import type { Selection } from "@/lib/types";
 /**
  * Specification submission endpoint.
  *
+ * The customer-facing site shows no pricing at all — this is a request-a-quote
+ * flow, not a checkout. Price is still computed here, from the catalogue, for
+ * the factory's own internal reference (the stored record and the email sent to
+ * sales@denimassembly.com both carry it); it is never included in the response
+ * sent back to the browser.
+ *
  * Contract (see README → "Submission"):
- *  1. Re-derive the whole price server-side. The client total is never trusted.
+ *  1. Re-derive the whole price server-side, for internal use only.
  *  2. Store the submission — email alone loses enquiries.
  *  3. Email the factory when a transport is configured (Resend).
  *
  * Response shape lets the client stay honest about what actually happened:
- *   { ok, stored, delivered, ref, serverTotal }
+ *   { ok, stored, delivered, ref }
  * The UI only shows "sent" when `delivered` is true.
  */
 
@@ -169,13 +175,13 @@ export async function POST(req: Request) {
     console.info(`[quote] no RESEND_API_KEY — not emailing. Ref ${ref}.`);
   }
 
+  // Deliberately no price in the response — the buyer's browser never receives
+  // it, only this server and the internal record/email do.
   return NextResponse.json({
     ok: true,
     ref,
     stored,
     delivered,
-    serverTotalUSD: grand,
-    serverUnitUSD: unit,
   });
 }
 

@@ -7,21 +7,12 @@ import {
   GROUPS,
   MOQ,
   PRODUCTS,
-  SAMPLE_FEE,
   SIZES,
   inFam,
   seedMeasurements,
 } from "@/lib/data";
 import { GROUP_CN, STEPS, T, optLabel, stepHint, stepLabel, stepTitle } from "@/lib/i18n";
-import {
-  famFor,
-  money,
-  orderTotal,
-  priceLines,
-  styleFor,
-  tierFor,
-  tierLabel,
-} from "@/lib/pricing";
+import { famFor, styleFor } from "@/lib/pricing";
 import { clsx } from "@/lib/clsx";
 import type { GroupCode, Measurements } from "@/lib/types";
 import { useAppStore } from "@/store/useAppStore";
@@ -147,19 +138,12 @@ export function Customiser() {
   const s = useAppStore();
 
   const lang = hydrated ? s.lang : "en";
-  const currency = hydrated ? s.currency : "USD";
   const zh = lang === "zh";
   const t = T[lang];
 
   const qty = num(s.qty);
   const style = styleFor(s.styleCode);
   const fam = famFor(style);
-  const { lines, unit, blockFee } = useMemo(
-    () => priceLines(s.styleCode, s.sel, qty, lang),
-    [s.styleCode, s.sel, qty, lang],
-  );
-  const tier = tierFor(qty);
-  const total = orderTotal(unit, qty);
   const belowMoq = qty < MOQ;
   const runTotal = s.run.reduce<number>((a, b) => a + num(b), 0);
   const leadTime = qty >= 1000 ? 42 : 28;
@@ -218,11 +202,6 @@ export function Customiser() {
     s.setSampleOnly(sampleOnly);
     router.push("/summary");
   }
-
-  const breakdown = [
-    ...lines.map((l) => ({ label: l.label, amount: money(l.amount, currency) })),
-    { label: t.sampleLine, amount: money(SAMPLE_FEE, currency, 2) },
-  ];
 
   return (
     <div className="flex flex-col min-[900px]:grid min-[900px]:[grid-template-columns:minmax(0,1fr)_clamp(340px,32vw,460px)] min-[900px]:h-[calc(100vh-60px)] min-[900px]:min-h-[560px] min-[900px]:overflow-hidden">
@@ -335,11 +314,10 @@ export function Customiser() {
           {/* Step 1 — base style picker */}
           {s.step === 1 && (
             <div>
-              <div className="flex items-baseline justify-between gap-3 mb-3.5">
+              <div className="mb-3.5">
                 <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-indigo">
                   {t.baseStyleHead}
                 </div>
-                <div className="text-[12.5px] text-[#5C5F68]">{t.fobPer}</div>
               </div>
               <div className="flex flex-col gap-2">
                 {PRODUCTS.map((p) => {
@@ -362,16 +340,11 @@ export function Customiser() {
                           {zh ? p.cnDesc : p.desc}
                         </div>
                       </div>
-                      <div className="text-right whitespace-nowrap">
-                        <div className="font-mono text-[12.5px]">
-                          {money(p.base, currency, 2)} {t.perPc}
+                      {zh && (
+                        <div className="text-[11.5px] text-[#5C5F68] whitespace-nowrap shrink-0">
+                          {p.name}
                         </div>
-                        {zh && (
-                          <div className="text-[11.5px] text-[#5C5F68] mt-[3px]">
-                            {p.name}
-                          </div>
-                        )}
-                      </div>
+                      )}
                     </button>
                   );
                 })}
@@ -398,12 +371,6 @@ export function Customiser() {
                   <div className="grid gap-2.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,92px),1fr))]">
                     {g.values.map((v) => {
                       const on = v.code === cur;
-                      const price =
-                        v.d === 0
-                          ? t.included
-                          : v.d > 0
-                            ? `+${money(v.d, currency, 2)} ${t.perPc}`
-                            : `${money(v.d, currency, 2)} ${t.perPc}`;
                       return (
                         <button
                           key={v.code}
@@ -431,9 +398,6 @@ export function Customiser() {
                               {zh ? v.cnDesc || v.desc : v.desc}
                             </div>
                           )}
-                          <div className="font-mono text-[10.5px] text-[#4A4E58] mt-1">
-                            {price}
-                          </div>
                         </button>
                       );
                     })}
@@ -442,12 +406,6 @@ export function Customiser() {
                   <div className="flex flex-col gap-2">
                     {g.values.map((v) => {
                       const on = v.code === cur;
-                      const price =
-                        v.d === 0
-                          ? t.included
-                          : v.d > 0
-                            ? `+${money(v.d, currency, 2)} ${t.perPc}`
-                            : `${money(v.d, currency, 2)} ${t.perPc}`;
                       return (
                         <button
                           key={v.code}
@@ -465,9 +423,6 @@ export function Customiser() {
                             <div className="text-[12.5px] text-[#4A4E58] mt-0.5 leading-[1.4] keep-all">
                               {zh ? v.cnDesc || v.desc : v.desc}
                             </div>
-                          </div>
-                          <div className="font-mono text-[12px] text-[#4A4E58] whitespace-nowrap">
-                            {price}
                           </div>
                         </button>
                       );
@@ -644,8 +599,8 @@ export function Customiser() {
 
                     <div className="mt-4 bg-[#F0F1F6] px-4 py-3.5 text-[12.5px] leading-[1.55] text-[#3E4250] keep-all">
                       {zh
-                        ? `当前编辑 ${s.blockSize} 尺码。版型调整每条加收 ${money(blockFee, currency, 2)}，需额外 4 天版房工作。打样费一次性收取 ${money(SAMPLE_FEE, currency, 2)} — 版房出格、车缝并寄出封样，确认后方可开裁大货。`
-                        : `Editing ${s.blockSize}. A modified block adds ${money(blockFee, currency, 2)} per piece and 4 days of pattern work. Sampling is charged once at ${money(SAMPLE_FEE, currency, 2)} — the pattern room grades, sews and ships a sealed sample for your sign-off before bulk cutting.`}
+                        ? `当前编辑 ${s.blockSize} 尺码。版型调整需额外 4 天版房工作 — 版房出格、车缝并寄出封样，确认后方可开裁大货。`
+                        : `Editing ${s.blockSize}. A modified block adds 4 days of pattern work — the pattern room grades, sews and ships a sealed sample for your sign-off before bulk cutting.`}
                     </div>
                   </div>
                 )}
@@ -654,7 +609,7 @@ export function Customiser() {
           )}
         </div>
 
-        {/* Quantity + breakdown block */}
+        {/* Quantity block */}
         <div className="border-t border-[#EAEAE6] px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-5 pb-4 bg-paper-raised min-[900px]:shrink-0">
           <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
             <div className="min-w-0 flex-1 basis-[200px]">
@@ -695,14 +650,6 @@ export function Customiser() {
                 })}
               </div>
             </div>
-            <div className="text-right shrink-0 min-w-0">
-              <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#5C5F68] mb-[7px]">
-                {t.tier}
-              </div>
-              <div className="font-mono text-[12px] text-indigo tracking-[0.04em]">
-                {tierLabel(tier, lang, true)}
-              </div>
-            </div>
           </div>
 
           {belowMoq && (
@@ -711,45 +658,18 @@ export function Customiser() {
             </div>
           )}
 
-          <div className="flex flex-col gap-[7px] mb-4">
-            {breakdown.map((b, i) => (
-              <div
-                key={i}
-                className="flex justify-between text-[12.5px] text-[#5C5F68] gap-4"
-              >
-                <span className="keep-all">{b.label}</span>
-                <span className="font-mono whitespace-nowrap">{b.amount}</span>
-              </div>
-            ))}
-          </div>
-
           <div className="flex justify-between gap-3 pt-3 border-t border-line-soft font-mono text-[11px] text-[#5C5F68] flex-wrap">
-            <span>
-              {zh ? "报价币种 " : "QUOTED IN "}
-              {currency} · FOB GUANGZHOU
-            </span>
+            <span>FOB GUANGZHOU</span>
             <span>
               {leadTime} {zh ? t.days : "DAYS"} · ~4 WEEKS
             </span>
           </div>
         </div>
 
-        {/* Sticky price bar */}
+        {/* Sticky CTA bar */}
         <div className="sticky bottom-0 bg-white border-t border-line-soft px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-3.5 pb-4 shrink-0 z-[3] shadow-bar">
-          <div className="flex items-baseline justify-between gap-3.5 mb-3 flex-wrap">
-            <div className="flex items-baseline gap-2.5 min-w-0">
-              <span className="font-display font-bold text-[31px] tracking-[-0.02em] leading-none [font-variant-numeric:tabular-nums]">
-                {money(unit, currency, 2)}
-              </span>
-              <span className="font-mono text-[10.5px] tracking-[0.12em] uppercase text-[#5C5F68]">
-                {t.perPc}
-              </span>
-            </div>
-            <div className="text-[12.5px] text-[#5C5F68] text-right keep-all">
-              {zh
-                ? `总计 ${money(total, currency)} · ${qty} 条（含 ${money(SAMPLE_FEE, currency, 2)} 打样费）`
-                : `Total ${money(total, currency)} · ${qty} pcs incl. ${money(SAMPLE_FEE, currency, 2)} sampling`}
-            </div>
+          <div className="mb-3 text-[12.5px] text-[#5C5F68] keep-all">
+            {t.quoteNote}
           </div>
           <div className="flex gap-2.5 flex-wrap">
             <button

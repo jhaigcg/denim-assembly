@@ -4,7 +4,7 @@ import { Summary } from "@/components/Summary";
 export const metadata: Metadata = {
   title: "Specification summary",
   description:
-    "The commercial specification document — base style, options, size run, indicative pricing and terms. Save as PDF or submit to the factory.",
+    "The specification document — base style, options and size run — ready to save as PDF or submit to the factory for a formal quotation.",
   robots: { index: false, follow: false },
 };
 

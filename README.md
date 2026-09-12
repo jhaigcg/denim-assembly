@@ -16,8 +16,11 @@ footer:
 | Route | Screen | Notes |
 | --- | --- | --- |
 | `/` | Showroom | Trust strip, hero, wired filter row, 21-style grid. SSR for SEO. |
-| `/customiser` | Customiser | 4-step wizard, family-aware option groups, front/back photo toggle, live per-piece + order-total pricing, size run, block adjustment, sampling mode. |
-| `/summary` | Specification summary | Commercial document; save-as-PDF via `@media print`; submit to factory. |
+| `/customiser` | Customiser | 4-step wizard, family-aware option groups, front/back photo toggle, size run, block adjustment, sampling mode. Request-a-quote — no price is shown. |
+| `/summary` | Specification summary | Commercial document; save-as-PDF via `@media print`; submit to factory for a formal quotation. |
+
+**No price is shown anywhere on the customer-facing site** — see "Pricing" below;
+this is a request-a-quote tool, not a self-serve checkout.
 
 The Agent, Admin and Order-tracking portals from the design file are **out of
 scope** and were not ported (`PORTALS_ENABLED = false` in the prototype). The
@@ -46,10 +49,10 @@ summary form falls back to a `mailto:` handoff exactly as the prototype does:
 | Concern | Location |
 | --- | --- |
 | Data model (styles, families, option groups, currencies, tiers, MOQ, sample fee) | `src/lib/data.ts` |
-| Pricing maths (`priceLines`, `groupsFor`, `tierFor`, `money`, `orderTotal`) | `src/lib/pricing.ts` — shared by client and server |
+| Pricing maths (`priceLines`, `groupsFor`, `tierFor`, `money`, `orderTotal`) — internal use only, see "Pricing" | `src/lib/pricing.ts` — server-side (`/api/quote`) |
 | All UI copy, both languages; `STEPS` + family-aware `stepLabel/stepTitle/stepHint`, `TAG_CN`, `GROUP_CN`, `OPT_CN` | `src/lib/i18n.ts` |
 | Showroom filter → style-code map | `src/lib/filters.ts` |
-| Cross-screen state (lang, currency, config, previewView, qty, run, measurements, contact) | `src/store/useAppStore.ts` (Zustand + `localStorage`) |
+| Cross-screen state (lang, config, previewView, qty, run, measurements, contact) | `src/store/useAppStore.ts` (Zustand + `localStorage`) |
 | Screens | `src/components/{Showroom,Customiser,Summary}.tsx` |
 | Header / Footer / Logo | `src/components/` |
 | Submission endpoint | `src/app/api/quote/route.ts` |
@@ -70,7 +73,12 @@ codes. `inFam()`, `FAM_PAIR` (the two groups shown in the preview caption) and
 Step titles/hints in the customiser panel vary by family too — see
 `stepLabel`/`stepTitle`/`stepHint` in `i18n.ts`.
 
-### Pricing
+### Pricing — request-a-quote, not self-serve
+
+**No price, discount or fee figure is shown anywhere in the customer-facing UI.**
+The buyer configures a full specification and submits it; the factory replies
+by email with a formal quotation. This is a deliberate product decision, not a
+missing feature — do not reintroduce a visible price without checking first.
 
 ```
 unitGross  = style.base + Σ(option.d for groups in the style's family) + BLOCK_FEE (0.70)
@@ -80,17 +88,21 @@ lineTotal  = unitPrice * qty
 orderTotal = lineTotal + SAMPLE_FEE (35, one-off)
 ```
 
-`/api/quote` **re-derives the whole price server-side** and never trusts the
-client total. In sampling-only mode the grand total is the sample fee alone and
-the size-run / tier rows are suppressed.
+`pricing.ts` still computes this — but only inside `/api/quote`, for the
+factory's **own internal reference**: it's written into the stored submission
+record and the email sent to `sales@denimassembly.com`, and deliberately left
+out of the JSON response sent back to the browser (so the buyer's client never
+even receives the figures, not just doesn't render them). MOQ gating (below 200
+pcs, "Sampling only" instead) still applies — that's a production constraint,
+independent of whether a price is shown.
 
-### Bilingual + currency
+### Bilingual
 
-English default. Switching language or currency is instant and non-destructive —
-the store keeps the configuration. Currency reprices every figure live off the
-demo rates in `data.ts`. **Build note:** those rates are hard-coded; production
-needs a daily rates job and the rate frozen onto each saved quote (the sheet
-says "valid 30 days").
+English default. Switching language is instant and non-destructive — the store
+keeps the configuration. There is no currency switcher (it existed only to
+reprice visible figures, which no longer exist); `CURRENCIES` and `money()` in
+`data.ts`/`pricing.ts` remain as the server-side pricing infrastructure and
+default to USD for the internal record.
 
 ### Persistence
 
@@ -126,6 +138,12 @@ buyer autoresponder.
 
 ## Known deltas from the design
 
+- **Pricing is hidden from the customer-facing site** (client request, post
+  design-handoff) — the design reference shows live per-piece and order-total
+  pricing throughout the showroom, customiser and summary sheet; this build
+  shows none of it. See "Pricing" above for what stayed (server-side
+  computation for internal use) versus what was removed (the currency
+  switcher, every $ figure, the summary's whole pricing panel).
 - Filter row keyword→style mapping in `src/lib/filters.ts` is a curated first
   pass against the new 21-style catalogue — confirm the intended buckets with
   the client, particularly "Raw denim" and "Women's" (no style description in

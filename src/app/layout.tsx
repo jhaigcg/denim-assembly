@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s · Denim Assembly",
   },
   description:
-    "B2B customised denim from a Guangdong manufacturer, factory-direct to overseas wholesale buyers. 21 base styles, deep customisation, live per-piece and order-total pricing in six currencies. MOQ 200 pcs, FOB Guangzhou.",
+    "B2B customised denim from a Guangdong manufacturer, factory-direct to overseas wholesale buyers. 21 base styles, deep customisation, submit a specification for a formal quotation. MOQ 200 pcs, FOB Guangzhou.",
   keywords: [
     "custom jeans manufacturer",
     "private label denim",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Denim Assembly — Customised Jeans, Factory Direct",
     description:
-      "Configure a denim specification and get live wholesale pricing. Manufacturer, not an agent.",
+      "Configure a denim specification and request a formal wholesale quotation. Manufacturer, not an agent.",
     url: siteUrl,
     siteName: "Denim Assembly",
     type: "website",
