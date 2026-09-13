@@ -14,7 +14,6 @@ import type { Family, GroupCode, Lang } from "./types";
 
 export interface Dict {
   tagline: string;
-  contact: string;
   heroEyebrow2: string;
   heroStyleRef: string;
   heroSpecLabels: string[];
@@ -90,7 +89,6 @@ export interface Dict {
 export const T: Record<Lang, Dict> = {
   en: {
     tagline: "Customised Jeans",
-    contact: "Contact",
     heroEyebrow2: "Thousand base styles",
     heroStyleRef: "DA-18 · Barrel Denim Jeans",
     heroSpecLabels: ["Minimum order", "Pricing", "Lead time"],
@@ -140,7 +138,7 @@ export const T: Record<Lang, Dict> = {
       "MOQ 200 pcs per style",
       "FOB Guangzhou · CIF on request",
       "Sampling fee on request · ~4 week lead",
-      "30% deposit, balance vs. B/L",
+      "Letter of credit accepted",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
     legal: ["Privacy", "Terms of sale", "Responsible sourcing"],
@@ -178,7 +176,6 @@ export const T: Record<Lang, Dict> = {
   },
   zh: {
     tagline: "牛仔裤定制",
-    contact: "联系我们",
     heroEyebrow2: "千款基础版型",
     heroStyleRef: "DA-18 · 桶形牛仔裤",
     heroSpecLabels: ["最低起订", "价格", "交期"],
@@ -225,7 +222,7 @@ export const T: Record<Lang, Dict> = {
       "每款起订 200 条",
       "FOB 广州 · 可询 CIF",
       "打样费另议 · 交期约 4 周",
-      "30% 订金，余款凭提单副本",
+      "接受信用证付款",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
     legal: ["隐私政策", "销售条款", "责任采购"],

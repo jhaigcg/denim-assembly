@@ -34,7 +34,7 @@ export function Header() {
 
   return (
     <header className="app-header sticky top-0 z-50 bg-ink text-paper flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-x-4 gap-y-2 px-4 py-2.5 sm:py-[9px] sm:min-h-[60px]">
-      {/* Row 1 — brand + (mobile) contact */}
+      {/* Row 1 — brand + (mobile) request-a-quote link */}
       <div className="flex items-center justify-between gap-3 min-w-0 sm:shrink sm:overflow-hidden">
         <Link
           href="/"
@@ -46,10 +46,10 @@ export function Header() {
           </span>
         </Link>
         <Link
-          href="/#contact"
+          href="/customiser"
           className="sm:hidden font-mono text-[12px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
         >
-          {t.contact}
+          {t.ctaGo}
         </Link>
       </div>
 
@@ -77,7 +77,7 @@ export function Header() {
         })}
       </nav>
 
-      {/* Row 3 — quote currency + language + (desktop) contact */}
+      {/* Row 3 — quote currency + language + (desktop) request-a-quote link */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0 flex-wrap">
         <div
           className="flex flex-1 sm:flex-none gap-px bg-[rgba(246,246,244,0.14)] p-px rounded"
@@ -121,10 +121,10 @@ export function Header() {
         <div className="hidden sm:block w-px h-[22px] bg-[rgba(246,246,244,0.2)]" />
 
         <Link
-          href="/#contact"
+          href="/customiser"
           className="hidden sm:inline font-mono text-[12px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
         >
-          {t.contact}
+          {t.ctaGo}
         </Link>
       </div>
     </header>
