@@ -189,6 +189,9 @@ export function Showroom() {
                   />
                 ))}
               </div>
+              <div className="mt-[9px] pt-[9px] border-t border-line font-mono text-[9.5px] tracking-[0.12em] uppercase text-txt-4">
+                {t.priceOnRequest}
+              </div>
             </div>
           </div>
         ))}

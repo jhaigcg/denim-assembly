@@ -140,6 +140,7 @@ export function Customiser() {
   const lang = hydrated ? s.lang : "en";
   const zh = lang === "zh";
   const t = T[lang];
+  const currency = hydrated ? s.currency : "USD";
 
   const qty = num(s.qty);
   const style = styleFor(s.styleCode);
@@ -659,7 +660,10 @@ export function Customiser() {
           )}
 
           <div className="flex justify-between gap-3 pt-3 border-t border-line-soft font-mono text-[11px] text-[#5C5F68] flex-wrap">
-            <span>FOB GUANGZHOU</span>
+            <span>
+              {zh ? "报价币种 " : "QUOTED IN "}
+              {currency} · FOB GUANGZHOU
+            </span>
             <span>
               {leadTime} {zh ? t.days : "DAYS"} · ~4 WEEKS
             </span>
@@ -668,8 +672,13 @@ export function Customiser() {
 
         {/* Sticky CTA bar */}
         <div className="sticky bottom-0 bg-white border-t border-line-soft px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-3.5 pb-4 shrink-0 z-[3] shadow-bar">
-          <div className="mb-3 text-[12.5px] text-[#5C5F68] keep-all">
-            {t.quoteNote}
+          <div className="flex justify-between items-baseline gap-3 mb-3 flex-wrap">
+            <span className="font-display text-[22px] font-bold text-ink whitespace-nowrap">
+              {t.priceOnRequest}
+            </span>
+            <span className="text-[12.5px] text-[#6A6E78] keep-all">
+              {t.quoteHint}
+            </span>
           </div>
           <div className="flex gap-2.5 flex-wrap">
             <button
@@ -683,9 +692,7 @@ export function Customiser() {
                   : "bg-ink text-paper cursor-pointer hover:bg-indigo transition-colors",
               )}
             >
-              {belowMoq
-                ? t.ctaMin
-                : `${t.ctaGo} · ${qty} ${t.pcsLower}`}
+              {t.ctaGo}
             </button>
             <button
               type="button"

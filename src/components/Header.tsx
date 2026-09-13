@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CURRENCIES } from "@/lib/data";
 import { T } from "@/lib/i18n";
 import { clsx } from "@/lib/clsx";
 import { useAppStore } from "@/store/useAppStore";
@@ -17,10 +18,13 @@ export function Header() {
   const pathname = usePathname();
   const hydrated = useHydrated();
   const lang = useAppStore((s) => s.lang);
+  const currency = useAppStore((s) => s.currency);
   const setLang = useAppStore((s) => s.setLang);
+  const setCurrency = useAppStore((s) => s.setCurrency);
 
   // Until hydrated, render the default state so SSR markup matches.
   const activeLang = hydrated ? lang : "en";
+  const activeCcy = hydrated ? currency : "USD";
   const t = T[activeLang];
 
   const tabs = [
@@ -73,8 +77,29 @@ export function Header() {
         })}
       </nav>
 
-      {/* Row 3 — language + (desktop) contact */}
+      {/* Row 3 — quote currency + language + (desktop) contact */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0 flex-wrap">
+        <div
+          className="flex flex-1 sm:flex-none gap-px bg-[rgba(246,246,244,0.14)] p-px rounded"
+          title={t.currencyPickerHint}
+        >
+          {CURRENCIES.map((c) => (
+            <button
+              key={c.code}
+              type="button"
+              onClick={() => setCurrency(c.code)}
+              className={clsx(
+                "flex-1 sm:flex-none min-h-[36px] sm:min-h-0 px-[7px] py-1.5 font-mono text-[11.5px] tracking-[0.04em] rounded",
+                activeCcy === c.code
+                  ? "bg-paper text-ink"
+                  : "bg-transparent text-[#9AA3C8]",
+              )}
+            >
+              {c.code}
+            </button>
+          ))}
+        </div>
+
         <div className="flex gap-px bg-[rgba(246,246,244,0.14)] p-px rounded">
           {LANGS.map((l) => (
             <button

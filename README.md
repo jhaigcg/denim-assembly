@@ -96,13 +96,17 @@ even receives the figures, not just doesn't render them). MOQ gating (below 200
 pcs, "Sampling only" instead) still applies — that's a production constraint,
 independent of whether a price is shown.
 
-### Bilingual
+Every "Price on request" spot carries a short hint that pricing is confirmed
+after review, and every submission CTA reads "REQUEST A QUOTE" / 申请报价
+(constant text — only its enabled/disabled styling varies with the MOQ check).
+
+### Bilingual & currency
 
 English default. Switching language is instant and non-destructive — the store
-keeps the configuration. There is no currency switcher (it existed only to
-reprice visible figures, which no longer exist); `CURRENCIES` and `money()` in
-`data.ts`/`pricing.ts` remain as the server-side pricing infrastructure and
-default to USD for the internal record.
+keeps the configuration. The currency switcher (USD/AUD/EUR/SGD/NZD/CNY) is
+still shown in the header, customiser and summary sheet — no price is repriced
+live from it, but it tells the factory which currency to quote back in, and is
+carried through to the submission (`currency` field) and the internal record.
 
 ### Persistence
 
@@ -138,12 +142,18 @@ buyer autoresponder.
 
 ## Known deltas from the design
 
-- **Pricing is hidden from the customer-facing site** (client request, post
-  design-handoff) — the design reference shows live per-piece and order-total
-  pricing throughout the showroom, customiser and summary sheet; this build
-  shows none of it. See "Pricing" above for what stayed (server-side
-  computation for internal use) versus what was removed (the currency
-  switcher, every $ figure, the summary's whole pricing panel).
+- **Pricing is hidden from the customer-facing site** (client request, then
+  independently reflected in the design team's own v1.2 handoff update — see
+  its README "Phase 1.1" section) — the original design reference showed live
+  per-piece and order-total pricing throughout the showroom, customiser and
+  summary sheet; this build shows none of it, only "Price on request" labels.
+  See "Pricing" above for what stayed (server-side computation for internal
+  use, and the currency switcher — kept per the v1.2 handoff, which still
+  references it even with pricing hidden) versus what was removed (every
+  visible $ figure). One deliberate deviation from the v1.2 handoff text: its
+  sample-only summary copy still contains a literal sample-fee figure, which
+  contradicts its own "no price shown" directive — treated as an oversight and
+  not reproduced; this build's sampling terms stay figure-free.
 - Filter row keyword→style mapping in `src/lib/filters.ts` is a curated first
   pass against the new 21-style catalogue — confirm the intended buckets with
   the client, particularly "Raw denim" and "Women's" (no style description in

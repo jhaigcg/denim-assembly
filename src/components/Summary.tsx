@@ -32,6 +32,7 @@ export function Summary() {
   const lang = s.lang;
   const zh = lang === "zh";
   const t = T[lang];
+  const currency = s.currency;
 
   const qty = num(s.qty);
   const style = styleFor(s.styleCode);
@@ -113,6 +114,7 @@ export function Summary() {
         body: JSON.stringify({
           ref: theRef,
           lang,
+          currency,
           styleCode: s.styleCode,
           sel: s.sel,
           qty,
@@ -218,6 +220,11 @@ export function Summary() {
               {t.ref} {ref || "—"}
             </div>
             <div>{quoteDate}</div>
+            <div>
+              {zh ? "报价币种 " : "QUOTED IN "}
+              {currency}
+            </div>
+            <div className="text-indigo">{t.valid}</div>
           </div>
         </div>
 
@@ -241,9 +248,9 @@ export function Summary() {
           </div>
 
           <div className="px-[clamp(20px,3.4vw,40px)] pt-7 pb-8 bg-paper-raised">
-            <MonoHead>{t.nextStepsHead}</MonoHead>
-            <div className="font-display font-bold text-[clamp(22px,2.6vw,28px)] leading-[1.15] tracking-[-0.015em]">
-              {t.replyPromise}
+            <MonoHead>{t.pricingHead}</MonoHead>
+            <div className="text-[13.5px] text-[#4A4E58] leading-[1.6] keep-all">
+              {t.priceOnRequest} — {t.quoteHint}
             </div>
             <div className="mt-[18px] text-[14px] leading-[1.6] text-[#4A4E58] [text-wrap:pretty] keep-all">
               {summaryTerms}
@@ -302,7 +309,7 @@ export function Summary() {
                 ? zh
                   ? "正在发送…"
                   : "Sending…"
-                : t.submitBtn}
+                : t.ctaGo}
             </button>
             <button
               type="button"

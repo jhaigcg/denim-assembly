@@ -2,10 +2,13 @@ import type { Family, GroupCode, Lang } from "./types";
 
 /**
  * All UI copy, both languages — ported from the design reference `const T`, then
- * adapted for a request-a-quote flow: no price, discount or fee figure is shown
- * to the buyer anywhere in the customer-facing UI. `pricing.ts` still computes
- * the real numbers server-side, for the factory's own reference in the
- * submission it receives — see `src/app/api/quote/route.ts`.
+ * adapted per the "Phase 1.1 — pricing hidden pending final costing" handoff
+ * update: no price, discount or fee figure is shown to the buyer anywhere in
+ * the customer-facing UI; every submission CTA reads "REQUEST A QUOTE" /
+ * 申请报价. `pricing.ts` still computes the real numbers server-side, for the
+ * factory's own reference in the submission it receives — see
+ * `src/app/api/quote/route.ts`. Do not restore price displays without
+ * confirming with the client first.
  * English is the default. Language switching must be instant and non-destructive.
  */
 
@@ -23,6 +26,9 @@ export interface Dict {
   fdBadge: string;
   fdStrip: string[];
   heroBadge: string;
+  priceOnRequest: string;
+  quoteHint: string;
+  currencyPickerHint: string;
   saveConfig: string;
   shareLink: string;
   baseStyleHead: string;
@@ -34,11 +40,12 @@ export interface Dict {
   samplingOnly: string;
   editSpec: string;
   ref: string;
+  valid: string;
   yourSpec: string;
+  pricingHead: string;
   yourDetails: string;
   notesLabel: string;
   notesPh: string;
-  submitBtn: string;
   savePdf: string;
   slotProduct: string;
   slotPreview: string;
@@ -63,15 +70,11 @@ export interface Dict {
   kSampleSize: string;
   kBulkQty: string;
   kSizeRun: string;
-  ctaMin: string;
   ctaGo: string;
   balanced: string;
   allocated: string;
   of: string;
   fields: [string, string][];
-  quoteNote: string;
-  nextStepsHead: string;
-  replyPromise: string;
   sampleTerms: string;
   bulkTerms: string;
   days: string;
@@ -90,16 +93,19 @@ export const T: Record<Lang, Dict> = {
     contact: "Contact",
     heroEyebrow2: "Thousand base styles",
     heroStyleRef: "DA-18 · Barrel Denim Jeans",
-    heroSpecLabels: ["Minimum order", "Turnaround", "Lead time"],
-    heroSpecValues: ["200 pcs / style", "1 business day", "~4 weeks"],
+    heroSpecLabels: ["Minimum order", "Pricing", "Lead time"],
+    heroSpecValues: ["200 pcs / style", "Tiered breaks", "~4 weeks"],
     heroTitle: "Your label, cut on our floor.",
     heroBody:
-      "Pick a base style. Specify denim quality, wash, hardware and trim, then set your size run. Minimum order 200 pieces per style. Submit your specification and our team will follow up with a formal quotation.",
-    heroCta: "Build a spec & request a quote →",
+      "Pick a base style. Specify denim quality, wash, hardware and trim, then set your size run. Minimum order 200 pieces per style, quoted in USD, AUD, EUR, SGD, NZD or CNY.",
+    heroCta: "Build a spec & get pricing →",
     heroCta2: "Talk to our team",
     fdBadge: "FACTORY DIRECT",
     fdStrip: ["Manufacturer, not an agent", "No trading-company markup", "Factory-gate pricing"],
     heroBadge: "13 OZ WASHED KHAKI · 100% COTTON",
+    priceOnRequest: "Price on request",
+    quoteHint: "Pricing confirmed once we review your specification.",
+    currencyPickerHint: "Preferred currency for your quotation",
     saveConfig: "Save configuration",
     shareLink: "Share link",
     baseStyleHead: "Base style · 21 blocks",
@@ -113,11 +119,12 @@ export const T: Record<Lang, Dict> = {
     samplingOnly: "Sampling only",
     editSpec: "← Edit specification",
     ref: "REF",
+    valid: "VALID 30 DAYS",
     yourSpec: "Your specification",
+    pricingHead: "Indicative pricing",
     yourDetails: "Your details",
     notesLabel: "Notes — artwork, labels, packing, target price",
     notesPh: "Anything our pattern room should know",
-    submitBtn: "Submit & email to Denim Assembly",
     savePdf: "Save as PDF",
     slotProduct: "Drop product shot",
     slotPreview: "Drop customiser preview render",
@@ -132,7 +139,7 @@ export const T: Record<Lang, Dict> = {
     termsList: [
       "MOQ 200 pcs per style",
       "FOB Guangzhou · CIF on request",
-      "Sampling available · ~4 week lead",
+      "Sampling fee on request · ~4 week lead",
       "30% deposit, balance vs. B/L",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
@@ -148,8 +155,7 @@ export const T: Record<Lang, Dict> = {
     kSampleSize: "Sample size",
     kBulkQty: "Intended bulk quantity",
     kSizeRun: "Size run",
-    ctaMin: "Minimum 200 pcs to continue",
-    ctaGo: "Review & submit",
+    ctaGo: "REQUEST A QUOTE",
     balanced: "Balanced",
     allocated: "allocated",
     of: "of",
@@ -159,13 +165,10 @@ export const T: Record<Lang, Dict> = {
       ["Email", "name@company.com"],
       ["Country / port", "e.g. Australia · Sydney"],
     ],
-    quoteNote: "No price is shown here — submit your spec and we'll reply with a formal quotation.",
-    nextStepsHead: "What happens next",
-    replyPromise: "We reply within 1 business day.",
     sampleTerms:
       "One sealed sample sewn to this specification, plus freight. Approx. 10 days. We'll confirm the sampling fee when we respond, and it's credited against your first bulk order (MOQ 200 pcs).",
     bulkTerms:
-      "This specification will be reviewed by our pattern room. We'll reply with a formal quotation confirming pricing, lead time and payment terms. Terms: 30% deposit, balance against B/L copy. Lead time approx. 4 weeks after sample approval.",
+      "Indicative only. Final pricing is confirmed after fabric availability, artwork review and a sealed sample. Terms: 30% deposit, balance against B/L copy. Lead time approx. 4 weeks after sample approval.",
     days: "DAYS",
     pcsLower: "pcs",
     baseUnit: "base unit",
@@ -178,16 +181,19 @@ export const T: Record<Lang, Dict> = {
     contact: "联系我们",
     heroEyebrow2: "千款基础版型",
     heroStyleRef: "DA-18 · 桶形牛仔裤",
-    heroSpecLabels: ["最低起订", "回复时效", "交期"],
-    heroSpecValues: ["每款 200 条", "1 个工作日", "约 4 周"],
+    heroSpecLabels: ["最低起订", "价格", "交期"],
+    heroSpecValues: ["每款 200 条", "阶梯优惠", "约 4 周"],
     heroTitle: "您的品牌，我们的车间。",
     heroBody:
-      "选择基础版型，指定面料、洗水、五金与辅料，再设定尺码配比。每款起订 200 条。提交您的定制规格，我们的团队将为您回复正式报价。",
-    heroCta: "定制并申请报价 →",
+      "选择基础版型，指定面料、洗水、五金与辅料，再设定尺码配比。每款起订 200 条，可用 USD、AUD、EUR、SGD、NZD 或 CNY 报价。",
+    heroCta: "定制并获取报价 →",
     heroCta2: "联系我们的团队",
     fdBadge: "工厂直销",
     fdStrip: ["我们是制衣厂，非代理", "无贸易公司加价", "出厂价直接采购"],
     heroBadge: "13 安士水洗卡其 · 100% 全棉",
+    priceOnRequest: "价格另议",
+    quoteHint: "具体报价将在我们审核规格后确认。",
+    currencyPickerHint: "选择您希望收到报价的币种",
     saveConfig: "保存配置",
     shareLink: "分享链接",
     baseStyleHead: "基础版型 · 21 款",
@@ -199,11 +205,12 @@ export const T: Record<Lang, Dict> = {
     samplingOnly: "仅打样",
     editSpec: "← 修改规格",
     ref: "编号",
+    valid: "有效期 30 天",
     yourSpec: "您的定制规格",
+    pricingHead: "参考报价",
     yourDetails: "您的联系资料",
     notesLabel: "备注 — 图案、唛头、包装、目标价格",
     notesPh: "任何需要版房了解的信息",
-    submitBtn: "提交并发送至 Denim Assembly",
     savePdf: "保存为 PDF",
     slotProduct: "拖入产品图",
     slotPreview: "拖入定制预览图",
@@ -217,7 +224,7 @@ export const T: Record<Lang, Dict> = {
     termsList: [
       "每款起订 200 条",
       "FOB 广州 · 可询 CIF",
-      "可申请打样 · 交期约 4 周",
+      "打样费另议 · 交期约 4 周",
       "30% 订金，余款凭提单副本",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
@@ -233,8 +240,7 @@ export const T: Record<Lang, Dict> = {
     kSampleSize: "打样尺码",
     kBulkQty: "预计大货数量",
     kSizeRun: "尺码配比",
-    ctaMin: "起订量 200 条",
-    ctaGo: "确认并提交",
+    ctaGo: "申请报价",
     balanced: "已配平",
     allocated: "已分配",
     of: "/",
@@ -244,13 +250,10 @@ export const T: Record<Lang, Dict> = {
       ["电子邮箱", "name@company.com"],
       ["国家 / 港口", "例：澳大利亚 · 悉尼"],
     ],
-    quoteNote: "此处不显示价格 — 提交规格后，我们将为您回复正式报价。",
-    nextStepsHead: "接下来会发生什么",
-    replyPromise: "我们将在 1 个工作日内回复。",
     sampleTerms:
       "按此规格车缝封样一条（另加运费），约需 10 天。打样费将在我们回复时为您确认，该费用可在首个大货订单（起订 200 条）中抵扣。",
     bulkTerms:
-      "此规格将由我们的版房审核。我们将回复正式报价，确认价格、交期与付款条款。条款：30% 订金，余款凭提单副本支付。封样确认后交期约 4 周。",
+      "此为参考报价。最终价格需在确认面料供应、图案审核及封样后确定。付款条款：30% 订金，余款凭提单副本支付。封样确认后交期约 4 周。",
     days: "天",
     pcsLower: "条",
     baseUnit: "基础单价",
