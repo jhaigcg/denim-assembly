@@ -232,5 +232,5 @@ export const FORM_ENDPOINT = "/api/quote";
 
 export const FACTORY_ADDRESS: Record<"en" | "zh", string[]> = {
   en: ["Denim Assembly — Manufacturing", "Jun'an Town, Shunde District", "Foshan City, Guangdong Province, China"],
-  zh: ["Denim Assembly 制衣厂", "广东省佛山市顺德区", "均安镇"],
+  zh: ["Denim Assembly服装有限公司", "广东省佛山市顺德"],
 };
