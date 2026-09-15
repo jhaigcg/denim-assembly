@@ -239,3 +239,6 @@ export const FACTORY_ADDRESS: Record<"en" | "zh", string[]> = {
 export const WHATSAPP_NUMBER = "61433303696";
 export const WHATSAPP_DISPLAY = "+61 433 303 696";
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+export const PHONE_NUMBER = "+8616637936932";
+export const PHONE_DISPLAY = "+86 166 3793 6932";

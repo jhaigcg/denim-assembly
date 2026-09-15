@@ -1,6 +1,6 @@
 "use client";
 
-import { FACTORY_ADDRESS, FACTORY_EMAIL, WHATSAPP_DISPLAY, WHATSAPP_LINK } from "@/lib/data";
+import { FACTORY_ADDRESS, FACTORY_EMAIL, PHONE_DISPLAY, PHONE_NUMBER, WHATSAPP_DISPLAY, WHATSAPP_LINK } from "@/lib/data";
 import { T } from "@/lib/i18n";
 import { useAppStore } from "@/store/useAppStore";
 import { useHydrated } from "./StoreHydration";
@@ -62,6 +62,9 @@ export function Footer() {
             >
               <WhatsAppIcon className="w-4 h-4 shrink-0 text-[#25D366]" />
               {WHATSAPP_DISPLAY}
+            </a>
+            <a href={`tel:${PHONE_NUMBER}`} className="text-paper hover:text-white">
+              {PHONE_DISPLAY}
             </a>
             <span>{t.hours}</span>
           </div>
