@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CURRENCIES, WHATSAPP_LINK } from "@/lib/data";
+import { CURRENCIES, FACTORY_EMAIL, WHATSAPP_LINK } from "@/lib/data";
 import { T } from "@/lib/i18n";
 import { clsx } from "@/lib/clsx";
 import { useAppStore } from "@/store/useAppStore";
@@ -33,6 +33,10 @@ export function Header() {
     { href: "/customiser", label: t.tabs.customiser },
   ];
 
+  const quoteMailto = `mailto:${FACTORY_EMAIL}?subject=${encodeURIComponent(
+    activeLang === "zh" ? "报价咨询" : "Quote Request",
+  )}`;
+
   return (
     <header className="app-header sticky top-0 z-50 bg-ink text-paper flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-x-4 gap-y-2 px-4 py-2.5 sm:py-[9px] sm:min-h-[60px]">
       {/* Row 1 — brand + (mobile) request-a-quote link */}
@@ -46,12 +50,12 @@ export function Header() {
             {t.tagline}
           </span>
         </Link>
-        <Link
-          href="/customiser"
+        <a
+          href={quoteMailto}
           className="sm:hidden font-mono text-[12px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
         >
           {t.ctaGo}
-        </Link>
+        </a>
       </div>
 
       {/* Row 2 — screen tabs */}
@@ -135,12 +139,12 @@ export function Header() {
 
         <div className="hidden sm:block w-px h-[22px] bg-[rgba(246,246,244,0.2)]" />
 
-        <Link
-          href="/customiser"
+        <a
+          href={quoteMailto}
           className="hidden sm:inline font-mono text-[12px] tracking-[0.12em] uppercase text-[#9AA3C8] hover:text-paper whitespace-nowrap"
         >
           {t.ctaGo}
-        </Link>
+        </a>
       </div>
     </header>
   );
