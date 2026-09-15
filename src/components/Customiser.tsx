@@ -665,7 +665,7 @@ export function Customiser() {
               {currency} · FOB GUANGZHOU
             </span>
             <span>
-              {leadTime} {zh ? t.days : "DAYS"} · ~4 WEEKS
+              {leadTime} {zh ? t.days : "DAYS"} · {zh ? "约 4 周" : "~4 WEEKS"}
             </span>
           </div>
         </div>

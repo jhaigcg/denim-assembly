@@ -101,7 +101,7 @@ export function Showroom() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/pd18-stephanie.png"
-            alt="Barrel Denim Jeans"
+            alt={zh ? "桶形牛仔裤" : "Barrel Denim Jeans"}
             className="absolute inset-0 w-full h-full object-contain px-[clamp(18px,3vw,44px)] pt-[clamp(18px,3vw,44px)] pb-[clamp(52px,5vw,72px)]"
           />
           <div className="absolute top-[clamp(18px,3vw,32px)] right-[clamp(18px,3vw,32px)] [writing-mode:vertical-rl] font-mono text-[10.5px] tracking-[0.24em] uppercase text-txt-3 pointer-events-none">

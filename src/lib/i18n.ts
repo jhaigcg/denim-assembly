@@ -166,7 +166,7 @@ export const T: Record<Lang, Dict> = {
     sampleTerms:
       "One sealed sample sewn to this specification, plus freight. Approx. 10 days. We'll confirm the sampling fee when we respond, and it's credited against your first bulk order (MOQ 200 pcs).",
     bulkTerms:
-      "Indicative only. Final pricing is confirmed after fabric availability, artwork review and a sealed sample. Terms: 30% deposit, balance against B/L copy. Lead time approx. 4 weeks after sample approval.",
+      "Indicative only. Final pricing is confirmed after fabric availability, artwork review and a sealed sample. Terms: payment by letter of credit. Lead time approx. 4 weeks after sample approval.",
     days: "DAYS",
     pcsLower: "pcs",
     baseUnit: "base unit",
@@ -250,7 +250,7 @@ export const T: Record<Lang, Dict> = {
     sampleTerms:
       "按此规格车缝封样一条（另加运费），约需 10 天。打样费将在我们回复时为您确认，该费用可在首个大货订单（起订 200 条）中抵扣。",
     bulkTerms:
-      "此为参考报价。最终价格需在确认面料供应、图案审核及封样后确定。付款条款：30% 订金，余款凭提单副本支付。封样确认后交期约 4 周。",
+      "此为参考报价。最终价格需在确认面料供应、图案审核及封样后确定。付款方式：信用证。封样确认后交期约 4 周。",
     days: "天",
     pcsLower: "条",
     baseUnit: "基础单价",

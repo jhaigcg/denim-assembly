@@ -55,23 +55,23 @@ export const PRODUCTS: Product[] = [
 export const GROUPS: OptionGroup[] = [
   {
     step: 2, code: "fabric", name: "Denim quality", fam: "denim", control: "swatch", values: [
-      { code: "raw12", name: "12oz Raw Indigo", hex: "#25315A", d: 0, desc: "12oz · 100% cotton · base quality" },
-      { code: "vint13", name: "13oz Vintage", hex: "#3A4A73", d: 2.4, desc: "13oz · 99% cotton / 1% spandex" },
-      { code: "heavy14", name: "14oz Heavyweight", hex: "#1B2440", d: 3.6, desc: "14oz · 100% cotton" },
-      { code: "blk11", name: "11oz Stretch Black", hex: "#17181C", d: 2.16, desc: "11oz · 92% cotton / 8% spandex" },
-      { code: "rec12", name: "12oz Recycled", hex: "#4C5A7E", d: 4.8, desc: "12oz · 70% recycled / 30% cotton" },
-      { code: "emb", name: "Print + Embroidery", hex: "#6A6390", d: 7.2, desc: "Two-process printed & embroidered denim · MOQ 500" },
+      { code: "raw12", name: "12oz Raw Indigo", hex: "#25315A", d: 0, desc: "12oz · 100% cotton · base quality", cnDesc: "12安 · 100% 棉 · 基础品质" },
+      { code: "vint13", name: "13oz Vintage", hex: "#3A4A73", d: 2.4, desc: "13oz · 99% cotton / 1% spandex", cnDesc: "13安 · 99% 棉 / 1% 氨纶" },
+      { code: "heavy14", name: "14oz Heavyweight", hex: "#1B2440", d: 3.6, desc: "14oz · 100% cotton", cnDesc: "14安 · 100% 棉" },
+      { code: "blk11", name: "11oz Stretch Black", hex: "#17181C", d: 2.16, desc: "11oz · 92% cotton / 8% spandex", cnDesc: "11安 · 92% 棉 / 8% 氨纶" },
+      { code: "rec12", name: "12oz Recycled", hex: "#4C5A7E", d: 4.8, desc: "12oz · 70% recycled / 30% cotton", cnDesc: "12安 · 70% 再生棉 / 30% 棉" },
+      { code: "emb", name: "Print + Embroidery", hex: "#6A6390", d: 7.2, desc: "Two-process printed & embroidered denim · MOQ 500", cnDesc: "双工艺印花绣花牛仔布 · 起订500条" },
     ],
   },
   {
     step: 2, code: "wash", name: "Wash process", fam: "denim", control: "swatch", values: [
-      { code: "none", name: "Raw / unwashed", hex: "#232E52", d: 0, desc: "Base — no wash", cnDesc: "原色未水洗 · 基础" },
-      { code: "rinse", name: "Light rinse", hex: "#33436E", d: 0.6, desc: "Single rinse cycle", cnDesc: "轻漂洗" },
-      { code: "vint-l", name: "Light vintage", hex: "#4C5F8A", d: 1.6, desc: "Light vintage cast", cnDesc: "浅复古洗水" },
-      { code: "vint-m", name: "Medium vintage", hex: "#6C7B9E", d: 2.2, desc: "Medium vintage cast", cnDesc: "中度复古洗水" },
-      { code: "vint-h", name: "Heavy vintage", hex: "#8B96B0", d: 3.2, desc: "Heavy vintage cast", cnDesc: "重度复古洗水" },
-      { code: "bleach", name: "Bleach wash", hex: "#AEB7C9", d: 3.8, desc: "Bleached, high contrast", cnDesc: "漂白洗水" },
-      { code: "snow", name: "Snow / acid wash", hex: "#C2C7D4", d: 4.6, desc: "Acid marbling · price TBC", cnDesc: "雪花洗 · 价格待定" },
+      { code: "none", name: "Raw / unwashed", hex: "#232E52", d: 0, desc: "Base — no wash", cnDesc: "原色未水洗，基础工艺" },
+      { code: "rinse", name: "Light rinse", hex: "#33436E", d: 0.6, desc: "Single rinse cycle", cnDesc: "单次水洗，轻微做旧" },
+      { code: "vint-l", name: "Light vintage", hex: "#4C5F8A", d: 1.6, desc: "Light vintage cast", cnDesc: "浅色做旧效果" },
+      { code: "vint-m", name: "Medium vintage", hex: "#6C7B9E", d: 2.2, desc: "Medium vintage cast", cnDesc: "中度做旧效果" },
+      { code: "vint-h", name: "Heavy vintage", hex: "#8B96B0", d: 3.2, desc: "Heavy vintage cast", cnDesc: "重度做旧效果" },
+      { code: "bleach", name: "Bleach wash", hex: "#AEB7C9", d: 3.8, desc: "Bleached, high contrast", cnDesc: "漂白工艺，强烈对比" },
+      { code: "snow", name: "Snow / acid wash", hex: "#C2C7D4", d: 4.6, desc: "Acid marbling, high contrast", cnDesc: "酸洗云纹效果，强烈对比" },
     ],
   },
   {
@@ -92,51 +92,51 @@ export const GROUPS: OptionGroup[] = [
   },
   {
     step: 3, code: "patch", name: "Waistband patch", fam: ["denim", "yarndye"], control: "row", values: [
-      { code: "std", name: "Standard debossed leather", desc: "Veg-tan, your logo die", d: 0 },
-      { code: "jacron", name: "Jacron (vegan)", desc: "Printed cellulose patch", d: 0.44 },
-      { code: "woven", name: "Woven label", desc: "Damask woven, folded edge", d: 0.7 },
-      { code: "none", name: "No patch", desc: "Clean waistband", d: -0.3 },
+      { code: "std", name: "Standard debossed leather", desc: "Veg-tan, your logo die", cnDesc: "植鞣革，烫印您的专属图案", d: 0 },
+      { code: "jacron", name: "Jacron (vegan)", desc: "Printed cellulose patch", cnDesc: "纤维素纯素皮牌，印刷图案", d: 0.44 },
+      { code: "woven", name: "Woven label", desc: "Damask woven, folded edge", cnDesc: "提花织唛，折边工艺", d: 0.7 },
+      { code: "none", name: "No patch", desc: "Clean waistband", cnDesc: "腰头不加皮牌", d: -0.3 },
     ],
   },
   {
     step: 3, code: "pocket", name: "Back pocket art", fam: ["denim", "yarndye"], control: "row", values: [
-      { code: "plain", name: "Plain", desc: "No decoration", d: 0 },
-      { code: "arc", name: "Arcuate embroidery", desc: "Single-needle, thread colour matched", d: 1.1 },
-      { code: "print", name: "Screen print", desc: "One-colour discharge print", d: 1.4 },
-      { code: "custom", name: "Print + embroidery", desc: "Two-process artwork, pattern room review", d: 2.8 },
+      { code: "plain", name: "Plain", desc: "No decoration", cnDesc: "无装饰图案", d: 0 },
+      { code: "arc", name: "Arcuate embroidery", desc: "Single-needle, thread colour matched", cnDesc: "单针绣花，配色缝线", d: 1.1 },
+      { code: "print", name: "Screen print", desc: "One-colour discharge print", cnDesc: "单色拔染丝网印花", d: 1.4 },
+      { code: "custom", name: "Print + embroidery", desc: "Two-process artwork, pattern room review", cnDesc: "印花加绣花双工艺，需版房确认图稿", d: 2.8 },
     ],
   },
   {
     step: 2, code: "cloth", name: "Fabric quality", fam: "woven", control: "swatch", values: [
-      { code: "lin-nat", name: "Linen blend — natural", hex: "#E4DACA", d: 0, desc: "55% linen / 45% viscose · base quality" },
-      { code: "lin-pure", name: "100% washed linen", hex: "#DCCFB9", d: 3.2, desc: "175gsm · garment washed" },
-      { code: "lin-hvy", name: "Heavy linen twill", hex: "#CFC0A6", d: 4.4, desc: "240gsm · 100% linen" },
-      { code: "ten-drape", name: "Tencel drape", hex: "#D9D2C6", d: 3.8, desc: "100% Tencel™ lyocell · fluid hand" },
-      { code: "cot-suit", name: "Cotton suiting", hex: "#C9C3B4", d: 2.6, desc: "260gsm · 98% cotton / 2% elastane" },
+      { code: "lin-nat", name: "Linen blend — natural", hex: "#E4DACA", d: 0, desc: "55% linen / 45% viscose · base quality", cnDesc: "55% 亚麻 / 45% 粘纤 · 基础品质" },
+      { code: "lin-pure", name: "100% washed linen", hex: "#DCCFB9", d: 3.2, desc: "175gsm · garment washed", cnDesc: "175克 · 成衣水洗" },
+      { code: "lin-hvy", name: "Heavy linen twill", hex: "#CFC0A6", d: 4.4, desc: "240gsm · 100% linen", cnDesc: "240克 · 100% 亚麻" },
+      { code: "ten-drape", name: "Tencel drape", hex: "#D9D2C6", d: 3.8, desc: "100% Tencel™ lyocell · fluid hand", cnDesc: "100% 天丝莱赛尔 · 垂坠手感" },
+      { code: "cot-suit", name: "Cotton suiting", hex: "#C9C3B4", d: 2.6, desc: "260gsm · 98% cotton / 2% elastane", cnDesc: "260克 · 98% 棉 / 2% 氨纶" },
     ],
   },
   {
     step: 2, code: "finish", name: "Finish", fam: "woven", control: "swatch", values: [
-      { code: "mill", name: "Mill finish", hex: "#E8DFD1", d: 0, desc: "As-woven, pressed", cnDesc: "原布整烫" },
-      { code: "gmt", name: "Garment wash", hex: "#DFD4C2", d: 0.9, desc: "Softened, relaxed hand", cnDesc: "成衣水洗" },
-      { code: "enzyme", name: "Enzyme softened", hex: "#D5C9B4", d: 1.4, desc: "Enzyme bath, extra drape", cnDesc: "酵素柔软洗" },
-      { code: "crease", name: "Permanent crease", hex: "#CDC0A8", d: 1.8, desc: "Heat-set front crease", cnDesc: "定型压线" },
+      { code: "mill", name: "Mill finish", hex: "#E8DFD1", d: 0, desc: "As-woven, pressed", cnDesc: "未经水洗，出厂整烫" },
+      { code: "gmt", name: "Garment wash", hex: "#DFD4C2", d: 0.9, desc: "Softened, relaxed hand", cnDesc: "柔软处理，垂坠自然" },
+      { code: "enzyme", name: "Enzyme softened", hex: "#D5C9B4", d: 1.4, desc: "Enzyme bath, extra drape", cnDesc: "酵素洗处理，垂坠感更佳" },
+      { code: "crease", name: "Permanent crease", hex: "#CDC0A8", d: 1.8, desc: "Heat-set front crease", cnDesc: "前身压烫定型褶线" },
     ],
   },
   {
     step: 3, code: "wpocket", name: "Back pockets", fam: "woven", control: "row", values: [
-      { code: "welt2", name: "Double welt", desc: "Two jetted welt pockets, tailored", d: 0 },
-      { code: "welt1", name: "Single welt", desc: "One jetted welt, right side", d: -0.2 },
-      { code: "welt-btn", name: "Welt with button tab", desc: "Jetted welt plus closure tab", d: 0.8 },
-      { code: "wnone", name: "No back pockets", desc: "Clean seat", d: -0.35 },
+      { code: "welt2", name: "Double welt", desc: "Two jetted welt pockets, tailored", cnDesc: "双开线袋，剪裁精致", d: 0 },
+      { code: "welt1", name: "Single welt", desc: "One jetted welt, right side", cnDesc: "单开线袋，右侧设计", d: -0.2 },
+      { code: "welt-btn", name: "Welt with button tab", desc: "Jetted welt plus closure tab", cnDesc: "开线袋另加扣袢闭合设计", d: 0.8 },
+      { code: "wnone", name: "No back pockets", desc: "Clean seat", cnDesc: "后身不设口袋", d: -0.35 },
     ],
   },
   {
     step: 3, code: "wlabel", name: "Branding label", fam: "woven", control: "row", values: [
-      { code: "wov-in", name: "Woven inner label", desc: "Damask woven, centre back", d: 0 },
-      { code: "wov-tab", name: "Side seam tab", desc: "Folded woven tab, left hip", d: 0.35 },
-      { code: "print-in", name: "Printed inner label", desc: "Heat-transfer, tagless", d: 0.2 },
-      { code: "wnolabel", name: "No label", desc: "Unbranded, buyer applies", d: -0.15 },
+      { code: "wov-in", name: "Woven inner label", desc: "Damask woven, centre back", cnDesc: "提花织唛，后中内贴", d: 0 },
+      { code: "wov-tab", name: "Side seam tab", desc: "Folded woven tab, left hip", cnDesc: "折边织唛条，左侧缝", d: 0.35 },
+      { code: "print-in", name: "Printed inner label", desc: "Heat-transfer, tagless", cnDesc: "热转印内标，无缝标签", d: 0.2 },
+      { code: "wnolabel", name: "No label", desc: "Unbranded, buyer applies", cnDesc: "不加标签，由买方自行处理", d: -0.15 },
     ],
   },
   {
@@ -150,9 +150,9 @@ export const GROUPS: OptionGroup[] = [
   },
   {
     step: 2, code: "sfinish", name: "Finish", fam: "yarndye", control: "swatch", values: [
-      { code: "s-mill", name: "Mill finish", hex: "#E4DECB", d: 0, desc: "As-woven, pressed", cnDesc: "原布整烫" },
-      { code: "s-gmt", name: "Garment wash", hex: "#DAD3BE", d: 0.9, desc: "Softened, slight shrink set", cnDesc: "成衣水洗" },
-      { code: "s-enzyme", name: "Enzyme softened", hex: "#D0C8B2", d: 1.4, desc: "Enzyme bath, relaxed hand", cnDesc: "酵素柔软洗" },
+      { code: "s-mill", name: "Mill finish", hex: "#E4DECB", d: 0, desc: "As-woven, pressed", cnDesc: "未经水洗，出厂整烫" },
+      { code: "s-gmt", name: "Garment wash", hex: "#DAD3BE", d: 0.9, desc: "Softened, slight shrink set", cnDesc: "柔软处理，轻微缩水定型" },
+      { code: "s-enzyme", name: "Enzyme softened", hex: "#D0C8B2", d: 1.4, desc: "Enzyme bath, relaxed hand", cnDesc: "酵素洗处理，手感柔软" },
     ],
   },
 ];
