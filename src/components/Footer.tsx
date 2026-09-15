@@ -1,10 +1,11 @@
 "use client";
 
-import { FACTORY_ADDRESS, FACTORY_EMAIL } from "@/lib/data";
+import { FACTORY_ADDRESS, FACTORY_EMAIL, WHATSAPP_DISPLAY, WHATSAPP_LINK } from "@/lib/data";
 import { T } from "@/lib/i18n";
 import { useAppStore } from "@/store/useAppStore";
 import { useHydrated } from "./StoreHydration";
 import { Logo } from "./Logo";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 const MonoLabel = ({ children }: { children: React.ReactNode }) => (
   <div className="font-mono text-[11.5px] tracking-[0.18em] uppercase text-[#6E7691] mb-4">
@@ -52,6 +53,15 @@ export function Footer() {
           <div className="flex flex-col gap-[9px] text-[15.5px] text-[#D4D7DE]">
             <a href={`mailto:${FACTORY_EMAIL}`} className="text-paper hover:text-white">
               {FACTORY_EMAIL}
+            </a>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener"
+              className="flex items-center gap-2 text-paper hover:text-[#25D366]"
+            >
+              <WhatsAppIcon className="w-4 h-4 shrink-0 text-[#25D366]" />
+              {WHATSAPP_DISPLAY}
             </a>
             <span>{t.hours}</span>
           </div>

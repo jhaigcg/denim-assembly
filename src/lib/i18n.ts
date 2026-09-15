@@ -28,6 +28,8 @@ export interface Dict {
   priceOnRequest: string;
   quoteHint: string;
   currencyPickerHint: string;
+  whatsapp: string;
+  whatsappAria: string;
   saveConfig: string;
   shareLink: string;
   baseStyleHead: string;
@@ -104,6 +106,8 @@ export const T: Record<Lang, Dict> = {
     priceOnRequest: "Price on request",
     quoteHint: "Pricing confirmed once we review your specification.",
     currencyPickerHint: "Preferred currency for your quotation",
+    whatsapp: "WhatsApp",
+    whatsappAria: "Chat with us on WhatsApp",
     saveConfig: "Save configuration",
     shareLink: "Share link",
     baseStyleHead: "Base style · 21 blocks",
@@ -191,6 +195,8 @@ export const T: Record<Lang, Dict> = {
     priceOnRequest: "价格另议",
     quoteHint: "具体报价将在我们审核规格后确认。",
     currencyPickerHint: "选择您希望收到报价的币种",
+    whatsapp: "WhatsApp",
+    whatsappAria: "通过 WhatsApp 联系我们",
     saveConfig: "保存配置",
     shareLink: "分享链接",
     baseStyleHead: "基础版型 · 21 款",

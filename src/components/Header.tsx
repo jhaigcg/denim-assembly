@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CURRENCIES } from "@/lib/data";
+import { CURRENCIES, WHATSAPP_LINK } from "@/lib/data";
 import { T } from "@/lib/i18n";
 import { clsx } from "@/lib/clsx";
 import { useAppStore } from "@/store/useAppStore";
 import { useHydrated } from "./StoreHydration";
 import { Logo } from "./Logo";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 const LANGS: { key: "en" | "zh"; label: string }[] = [
   { key: "en", label: "EN" },
@@ -117,6 +118,20 @@ export function Header() {
             </button>
           ))}
         </div>
+
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
+          rel="noopener"
+          aria-label={t.whatsappAria}
+          title={t.whatsappAria}
+          className="flex items-center gap-[7px] min-h-[36px] sm:min-h-0 px-[9px] py-1.5 rounded border border-[rgba(246,246,244,0.3)] text-[#9AA3C8] hover:border-[#25D366] hover:text-[#25D366] transition-colors"
+        >
+          <WhatsAppIcon className="w-4 h-4 shrink-0" />
+          <span className="hidden sm:inline font-mono text-[11.5px] tracking-[0.06em] whitespace-nowrap">
+            {t.whatsapp}
+          </span>
+        </a>
 
         <div className="hidden sm:block w-px h-[22px] bg-[rgba(246,246,244,0.2)]" />
 

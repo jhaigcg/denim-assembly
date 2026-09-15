@@ -234,3 +234,8 @@ export const FACTORY_ADDRESS: Record<"en" | "zh", string[]> = {
   en: ["Denim Assembly — Manufacturing", "Jun'an Town, Shunde District", "Foshan City, Guangdong Province, China"],
   zh: ["Denim Assembly服装有限公司", "广东省佛山市顺德"],
 };
+
+/** Digits only, no leading +, per the wa.me click-to-chat URL spec. */
+export const WHATSAPP_NUMBER = "61433303696";
+export const WHATSAPP_DISPLAY = "+61 433 303 696";
+export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;

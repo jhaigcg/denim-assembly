@@ -3,6 +3,7 @@ import "./globals.css";
 import { StoreHydration } from "@/components/StoreHydration";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://denimassembly.com";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <WhatsAppFloat />
       </body>
     </html>
   );
