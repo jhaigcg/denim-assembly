@@ -78,7 +78,6 @@ export interface Dict {
   fields: [string, string][];
   sampleTerms: string;
   bulkTerms: string;
-  days: string;
   pcsLower: string;
   /** Internal price-breakdown line labels — used by `pricing.ts` for the
    * submission record/email sent to the factory, never rendered to the buyer. */
@@ -93,8 +92,8 @@ export const T: Record<Lang, Dict> = {
     tagline: "Customised Jeans",
     heroEyebrow2: "Thousand base styles",
     heroStyleRef: "DA-18 · Barrel Denim Jeans",
-    heroSpecLabels: ["Minimum order", "Pricing", "Lead time"],
-    heroSpecValues: ["200 pcs / style", "Tiered breaks", "~4 weeks"],
+    heroSpecLabels: ["Minimum order", "Pricing", "Sampling turnaround", "Bulk production"],
+    heroSpecValues: ["200 pcs / style", "Tiered breaks", "~1 week", "~3 weeks"],
     heroTitle: "Your label, cut on our floor.",
     heroBody:
       "Pick a base style. Specify denim quality, wash, hardware and trim, then set your size run. Minimum order 200 pieces per style, quoted in USD, AUD, EUR, SGD, NZD or CNY.",
@@ -141,7 +140,7 @@ export const T: Record<Lang, Dict> = {
     termsList: [
       "MOQ 200 pcs per style",
       "FOB Guangzhou · CIF on request",
-      "Sampling fee on request · ~4 week lead",
+      "Sampling fee on request · ~1 week turnaround",
       "Letter of credit accepted",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
@@ -168,10 +167,9 @@ export const T: Record<Lang, Dict> = {
       ["Country / port", "e.g. Australia · Sydney"],
     ],
     sampleTerms:
-      "One sealed sample sewn to this specification, plus freight. Approx. 10 days. We'll confirm the sampling fee when we respond, and it's credited against your first bulk order (MOQ 200 pcs).",
+      "One sealed sample sewn to this specification, plus freight. Approx. 1 week. We'll confirm the sampling fee when we respond, and it's credited against your first bulk order (MOQ 200 pcs).",
     bulkTerms:
-      "Indicative only. Final pricing is confirmed after fabric availability, artwork review and a sealed sample. Terms: payment by letter of credit. Lead time approx. 4 weeks after sample approval.",
-    days: "DAYS",
+      "Indicative only. Final pricing is confirmed after fabric availability, artwork review and a sealed sample. Terms: payment by letter of credit. Lead time approx. 3 weeks after sample approval.",
     pcsLower: "pcs",
     baseUnit: "base unit",
     blockLine: "Modified block (per pc)",
@@ -182,8 +180,8 @@ export const T: Record<Lang, Dict> = {
     tagline: "牛仔裤定制",
     heroEyebrow2: "千款基础版型",
     heroStyleRef: "DA-18 · 桶形牛仔裤",
-    heroSpecLabels: ["最低起订", "价格", "交期"],
-    heroSpecValues: ["每款 200 条", "阶梯优惠", "约 4 周"],
+    heroSpecLabels: ["最低起订", "价格", "打样周期", "大货生产"],
+    heroSpecValues: ["每款 200 条", "阶梯优惠", "约 1 周", "约 3 周"],
     heroTitle: "您的品牌，我们的车间。",
     heroBody:
       "选择基础版型，指定面料、洗水、五金与辅料，再设定尺码配比。每款起订 200 条，可用 USD、AUD、EUR、SGD、NZD 或 CNY 报价。",
@@ -227,7 +225,7 @@ export const T: Record<Lang, Dict> = {
     termsList: [
       "每款起订 200 条",
       "FOB 广州 · 可询 CIF",
-      "打样费另议 · 交期约 4 周",
+      "打样费另议 · 约 1 周交期",
       "接受信用证付款",
     ],
     copyright: "© 2026 Denim Assembly · denimassembly.com",
@@ -254,10 +252,9 @@ export const T: Record<Lang, Dict> = {
       ["国家 / 港口", "例：澳大利亚 · 悉尼"],
     ],
     sampleTerms:
-      "按此规格车缝封样一条（另加运费），约需 10 天。打样费将在我们回复时为您确认，该费用可在首个大货订单（起订 200 条）中抵扣。",
+      "按此规格车缝封样一条（另加运费），约需 1 周。打样费将在我们回复时为您确认，该费用可在首个大货订单（起订 200 条）中抵扣。",
     bulkTerms:
-      "此为参考报价。最终价格需在确认面料供应、图案审核及封样后确定。付款方式：信用证。封样确认后交期约 4 周。",
-    days: "天",
+      "此为参考报价。最终价格需在确认面料供应、图案审核及封样后确定。付款方式：信用证。封样确认后交期约 3 周。",
     pcsLower: "条",
     baseUnit: "基础单价",
     blockLine: "版型调整（每条）",

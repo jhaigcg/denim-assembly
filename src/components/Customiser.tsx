@@ -147,7 +147,6 @@ export function Customiser() {
   const fam = famFor(style);
   const belowMoq = qty < MOQ;
   const runTotal = s.run.reduce<number>((a, b) => a + num(b), 0);
-  const leadTime = qty >= 1000 ? 42 : 28;
 
   // The two groups whose values feed the preview caption / spec strip vary by family.
   const [pairCodeA, pairCodeB] = FAM_PAIR[fam];
@@ -665,7 +664,7 @@ export function Customiser() {
               {currency} · FOB GUANGZHOU
             </span>
             <span>
-              {leadTime} {zh ? t.days : "DAYS"} · {zh ? "约 4 周" : "~4 WEEKS"}
+              {zh ? "大货生产 约 3 周" : "BULK PRODUCTION ~3 WEEKS"}
             </span>
           </div>
         </div>
