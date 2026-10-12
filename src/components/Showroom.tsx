@@ -14,9 +14,9 @@ import { FactoryVideo } from "./FactoryVideo";
 function TrustStrip({ lang }: { lang: "en" | "zh" }) {
   const t = T[lang];
   return (
-    <div className="bg-ink-strip text-paper px-[clamp(18px,4vw,56px)] py-2.5 flex items-center justify-center gap-x-[22px] gap-y-3 flex-wrap font-mono text-[11.5px] tracking-[0.2em] uppercase">
+    <div className="bg-ink-strip text-paper px-[clamp(18px,4vw,56px)] py-2.5 flex items-center justify-center gap-x-[22px] gap-y-1.5 sm:gap-y-3 flex-wrap font-mono text-[11.5px] tracking-[0.2em] uppercase">
       <span className="font-medium">{t.fdBadge}</span>
-      <span className="w-[3px] h-[3px] rounded-full bg-[rgba(242,240,236,0.45)]" />
+      <span className="hidden sm:block w-[3px] h-[3px] rounded-full bg-[rgba(242,240,236,0.45)]" />
       {t.fdStrip.map((c) => (
         <span key={c} className="text-[#C3CAE6] whitespace-nowrap keep-all">
           {c}
@@ -110,7 +110,7 @@ export function Showroom() {
           </div>
           <div className="absolute left-[clamp(18px,3vw,32px)] right-[clamp(18px,3vw,32px)] bottom-[clamp(18px,3vw,28px)] flex items-center gap-3.5 pointer-events-none">
             <span className="w-[22px] h-px bg-ink shrink-0" />
-            <span className="font-mono text-[9.5px] tracking-[0.22em] uppercase text-[#3E3B35] whitespace-nowrap overflow-hidden text-ellipsis">
+            <span className="font-mono text-[9.5px] leading-[1.6] tracking-[0.22em] uppercase text-[#3E3B35] pr-14 sm:pr-0 sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis">
               {t.heroBadge}
             </span>
           </div>

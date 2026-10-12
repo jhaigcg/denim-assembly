@@ -88,8 +88,9 @@ export function Summary() {
         { k: t.kQty, v: `${qty.toLocaleString("en-US")} ${t.pcsLower}` },
         {
           k: t.kSizeRun,
+          // nbsp before each dot so a wrapped line never starts with a stray "·"
           v: SIZES.map((sz, i) => `${sz.replace("W", "")}×${s.run[i] || 0}`).join(
-            "  ·  ",
+            " · ",
           ),
         },
       );
@@ -215,7 +216,7 @@ export function Summary() {
               {sampleOnly ? t.summarySample : t.summarySpec}
             </h1>
           </div>
-          <div className="font-mono text-[12.5px] leading-[2] text-[#4A4E58] text-right">
+          <div className="font-mono text-[12.5px] leading-[1.9] sm:leading-[2] text-[#4A4E58] text-left sm:text-right">
             <div>
               {t.ref} {ref || "—"}
             </div>

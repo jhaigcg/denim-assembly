@@ -670,12 +670,14 @@ export function Customiser() {
         </div>
 
         {/* Sticky CTA bar */}
-        <div className="sticky bottom-0 bg-white border-t border-line-soft px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-3.5 pb-4 shrink-0 z-[3] shadow-bar">
-          <div className="flex justify-between items-baseline gap-3 mb-3 flex-wrap">
-            <span className="font-display text-[22px] font-bold text-ink whitespace-nowrap">
+        <div
+          className="sticky bottom-0 bg-white border-t border-line-soft px-[18px] min-[900px]:px-[clamp(18px,2.2vw,30px)] pt-2.5 pb-3 min-[900px]:pt-3.5 min-[900px]:pb-4 shrink-0 z-[3] shadow-bar"
+        >
+          <div className="flex justify-between items-baseline gap-x-3 gap-y-0.5 mb-2.5 min-[900px]:mb-3 flex-wrap">
+            <span className="font-display text-[18px] min-[900px]:text-[22px] font-bold text-ink whitespace-nowrap">
               {t.priceOnRequest}
             </span>
-            <span className="text-[12.5px] text-[#6A6E78] keep-all">
+            <span className="text-[11.5px] min-[900px]:text-[12.5px] leading-[1.35] text-[#6A6E78] keep-all">
               {t.quoteHint}
             </span>
           </div>
@@ -685,7 +687,7 @@ export function Customiser() {
               disabled={belowMoq}
               onClick={() => goSummary(false)}
               className={clsx(
-                "flex-1 px-3.5 py-3.5 font-display text-[14.5px] font-bold rounded tracking-[0.005em] whitespace-nowrap",
+                "flex-1 px-3 sm:px-3.5 py-3 sm:py-3.5 font-display text-[13.5px] sm:text-[14.5px] font-bold rounded tracking-[0.005em] whitespace-nowrap",
                 belowMoq
                   ? "bg-[#D8D8D2] text-[#5C5F68] cursor-not-allowed"
                   : "bg-ink text-paper cursor-pointer hover:bg-indigo transition-colors",
@@ -696,7 +698,7 @@ export function Customiser() {
             <button
               type="button"
               onClick={() => goSummary(true)}
-              className="bg-white border border-[#C9CAD2] px-[18px] py-3.5 font-sans text-[13.5px] rounded whitespace-nowrap hover:border-ink transition-colors"
+              className="bg-white border border-[#C9CAD2] px-3.5 sm:px-[18px] py-3 sm:py-3.5 font-sans text-[13px] sm:text-[13.5px] rounded whitespace-nowrap hover:border-ink transition-colors"
             >
               {t.samplingOnly}
             </button>

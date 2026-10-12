@@ -38,7 +38,7 @@ export function Header() {
   )}`;
 
   return (
-    <header className="app-header sticky top-0 z-50 bg-ink text-paper flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-x-4 gap-y-2 px-4 py-2.5 sm:py-[9px] sm:min-h-[60px]">
+    <header className="app-header sm:sticky sm:top-0 z-50 bg-ink text-paper flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-x-4 gap-y-2 px-4 py-2.5 sm:py-[9px] sm:min-h-[60px]">
       {/* Row 1 — brand + (mobile) request-a-quote link */}
       <div className="flex items-center justify-between gap-3 min-w-0 sm:shrink sm:overflow-hidden">
         <Link
