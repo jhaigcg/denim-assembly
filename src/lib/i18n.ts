@@ -30,6 +30,10 @@ export interface Dict {
   currencyPickerHint: string;
   whatsapp: string;
   whatsappAria: string;
+  videoEyebrow: string;
+  videoTitle: string;
+  videoBody: string;
+  videoAria: string;
   saveConfig: string;
   shareLink: string;
   baseStyleHead: string;
@@ -107,6 +111,11 @@ export const T: Record<Lang, Dict> = {
     currencyPickerHint: "Preferred currency for your quotation",
     whatsapp: "WhatsApp",
     whatsappAria: "Chat with us on WhatsApp",
+    videoEyebrow: "Inside our factory",
+    videoTitle: "See how your jeans are made.",
+    videoBody:
+      "Pattern room, cutting, sewing, in-house wash house and QC — all under one roof in Shunde, Foshan.",
+    videoAria: "Denim Assembly factory video",
     saveConfig: "Save configuration",
     shareLink: "Share link",
     baseStyleHead: "Base style · 21 blocks",
@@ -195,6 +204,10 @@ export const T: Record<Lang, Dict> = {
     currencyPickerHint: "选择您希望收到报价的币种",
     whatsapp: "WhatsApp",
     whatsappAria: "通过 WhatsApp 联系我们",
+    videoEyebrow: "走进我们的工厂",
+    videoTitle: "看看您的牛仔裤如何诞生。",
+    videoBody: "版房、裁剪、车缝、自有洗水厂与品质检验，全部在佛山顺德一体化完成。",
+    videoAria: "Denim Assembly 工厂视频",
     saveConfig: "保存配置",
     shareLink: "分享链接",
     baseStyleHead: "基础版型 · 21 款",

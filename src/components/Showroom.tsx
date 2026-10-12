@@ -9,6 +9,7 @@ import { FILTER_CODES } from "@/lib/filters";
 import { clsx } from "@/lib/clsx";
 import { useAppStore } from "@/store/useAppStore";
 import { useHydrated } from "./StoreHydration";
+import { FactoryVideo } from "./FactoryVideo";
 
 function TrustStrip({ lang }: { lang: "en" | "zh" }) {
   const t = T[lang];
@@ -115,6 +116,24 @@ export function Showroom() {
           </div>
         </div>
       </div>
+
+      {/* Factory video */}
+      <section className="bg-ink text-paper px-[clamp(18px,4vw,56px)] py-[clamp(40px,6vw,88px)] grid gap-x-[clamp(28px,4vw,64px)] gap-y-8 items-center min-[900px]:[grid-template-columns:minmax(0,1fr)_minmax(0,1.6fr)]">
+        <div className="min-w-0">
+          <div className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-[#9AA3C8] mb-[clamp(18px,2.4vw,28px)]">
+            {t.videoEyebrow}
+          </div>
+          <h2 className="font-display font-bold m-0 text-[clamp(30px,4.2vw,52px)] leading-[1.02] tracking-[-0.03em] max-w-[14ch] [text-wrap:balance] keep-all">
+            {t.videoTitle}
+          </h2>
+          <p className="mt-5 mb-0 text-[clamp(15px,1.4vw,17px)] leading-[1.7] text-[#C8CBD6] max-w-[42ch] [text-wrap:pretty] keep-all">
+            {t.videoBody}
+          </p>
+        </div>
+        <div className="min-w-0">
+          <FactoryVideo ariaLabel={t.videoAria} />
+        </div>
+      </section>
 
       {/* Filter row */}
       <div className="px-[clamp(18px,4vw,56px)] pt-[clamp(32px,4.5vw,56px)] pb-[22px] flex items-end justify-between gap-8 flex-wrap">
